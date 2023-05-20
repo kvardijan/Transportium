@@ -14,8 +14,12 @@
             <ColumnDefinition Width="3*"></ColumnDefinition>
             <ColumnDefinition Width="1*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Label BorderBrush="Black" BorderThickness="1" Background="LightGray" Grid.Column="0"/>
+        <Label Background="LightGray" Grid.Column="0" BorderBrush="Black" BorderThickness="1"/>
+        <Label BorderBrush="Black" BorderThickness="1" Background="LightGray" Grid.Column="0" Height="500" VerticalAlignment="Bottom"/>
         <Label BorderBrush="Black" BorderThickness="1" Background="LightGray" Grid.Column="1" Height="200" VerticalAlignment="Bottom"/>
-        <Label BorderBrush="Black" BorderThickness="1" Background="LightGray" Grid.Column="2"/>
+        <DockPanel Grid.Column="2">
+            <Label DockPanel.Dock="Top" Content="Postupak" HorizontalContentAlignment="Center" Background="LightGray" Height="50" VerticalContentAlignment="Center" FontSize="22" BorderBrush="Black" BorderThickness="1"/>
+            <ListBox DockPanel.Dock="Top"/>
+        </DockPanel>
     </Grid>
 </Window>
