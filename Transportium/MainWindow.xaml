@@ -14,11 +14,17 @@
             <ColumnDefinition Width="3*"></ColumnDefinition>
             <ColumnDefinition Width="1*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Label Background="LightGray" Grid.Column="0" BorderBrush="Black" BorderThickness="1"/>
-        <Label BorderBrush="Black" BorderThickness="1" Background="LightGray" Grid.Column="0" Height="500" VerticalAlignment="Bottom"/>
-        <Label BorderBrush="Black" BorderThickness="1" Background="LightGray" Grid.Column="1" Height="200" VerticalAlignment="Bottom"/>
+        <DockPanel Grid.Column="0">
+            <Label Background="LightGray" Grid.Column="0" BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Height="200" VerticalAlignment="Top"/>
+            <Label BorderBrush="Black" BorderThickness="1,0,1,1" Background="LightGray" DockPanel.Dock="Top"/>
+        </DockPanel>
+        
+        <DockPanel Grid.Column="1">
+            <Label Background="LightGray" DockPanel.Dock="Bottom" Height="200" VerticalAlignment="Bottom" BorderBrush="Black" BorderThickness="0,1,0,1"/>
+            <ContentControl/>
+        </DockPanel>
         <DockPanel Grid.Column="2">
-            <Label DockPanel.Dock="Top" Content="Postupak" HorizontalContentAlignment="Center" Background="LightGray" Height="50" VerticalContentAlignment="Center" FontSize="22" BorderBrush="Black" BorderThickness="1"/>
+            <Label DockPanel.Dock="Top" Content="Postupak" HorizontalContentAlignment="Center" Background="LightGray" Height="50" VerticalContentAlignment="Center" FontSize="22" BorderBrush="Black" BorderThickness="1,0,1,1"/>
             <ListBox DockPanel.Dock="Top"/>
         </DockPanel>
     </Grid>
