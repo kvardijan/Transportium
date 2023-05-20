@@ -28,7 +28,7 @@ namespace Transportium
         private void GenerirajTablicu(int brojRedova, int brojStupaca)
         {
             DodajOznakeStupaca(brojStupaca);
-            //DodajOznakeRedova(brojRedova);
+            DodajOznakeRedova(brojRedova);
             //DodajTextBoxeve(brojRedova, brojStupaca);
         }
 
@@ -39,7 +39,29 @@ namespace Transportium
 
         private void DodajOznakeRedova(int brojRedova)
         {
-            throw new NotImplementedException();
+            for (int i = 1; i <= brojRedova + 1; i++)
+            {
+                Grid celija = new Grid();
+                ContentControl container = new ContentControl();
+                Label oznaka = new Label();
+
+                if (i != brojRedova + 1)
+                {
+                    oznaka.Content = "I" + i.ToString();
+                }
+                else
+                {
+                    oznaka.Content = "ai";
+                }
+
+                oznaka = OblikujLabel(oznaka);
+
+                container.Content = oznaka;
+                celija.Children.Add(container);
+                gridTablicaProblema.Children.Add(celija);
+                Grid.SetColumn(celija, 0);
+                Grid.SetRow(celija, i);
+            }
         }
 
         private void DodajOznakeStupaca(int brojStupaca)
@@ -47,16 +69,46 @@ namespace Transportium
 
             for (int i = 1; i <= brojStupaca + 1; i++)
             {
+                Grid celija = new Grid();
+                ContentControl container = new ContentControl();
                 Label oznaka = new Label();
-                oznaka.Content = "O" + i.ToString();
-                gridTablicaProblema.Children.Add(oznaka);
-                Grid.SetRow(oznaka, 0);
-                Grid.SetColumn(oznaka, i);
+                if (i != brojStupaca + 1)
+                {
+                    oznaka.Content = "O" + i.ToString();
+                }
+                else
+                {
+                    oznaka.Content = "bj";
+                }
+                oznaka = OblikujLabel(oznaka);
+                container.Content = oznaka;
+                celija.Children.Add(container);
+                gridTablicaProblema.Children.Add(celija);
+                Grid.SetRow(celija, 0);
+                Grid.SetColumn(celija, i);
             }
         }
 
+        private Label OblikujLabel(Label oznaka)
+        {
+            oznaka.FontSize = 15;
+            oznaka.FontWeight = FontWeights.Bold;
+            oznaka.VerticalContentAlignment = VerticalAlignment.Center;
+            oznaka.HorizontalContentAlignment = HorizontalAlignment.Center;
+            return oznaka;
+        }
+
+        private void OcistiGrid()
+        {
+            gridTablicaProblema.Children.Clear();
+        }
+
+
+
+
         private void btnGenerirajTablicu_Click(object sender, RoutedEventArgs e)
         {
+            OcistiGrid();
             int nRedova = Int32.Parse(txtBrojRedova.Text);
             int nStupaca = Int32.Parse(txtBrojStupaca.Text);
             GenerirajTablicu(nRedova,nStupaca);
