@@ -35,15 +35,36 @@
                 <Label Content="Metoda optimizacije" DockPanel.Dock="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Top" FontSize="18" Margin="0,30,0,0"/>
                 <ComboBox DockPanel.Dock="Top" Height="40" Width="220" VerticalAlignment="Top" Margin="0,20,0,0"/>
                 <Button Content="Riješi problem" Height="50" DockPanel.Dock="Top" VerticalAlignment="Top" Margin="0,30,0,0" Width="170" FontSize="22"/>
+                <Label DockPanel.Dock="Bottom" VerticalAlignment="Bottom" Content="V 1.0" HorizontalContentAlignment="Center"/>
             </DockPanel>
         </Border>
         <DockPanel Grid.Column="1">
-            <Label Background="#FFEEEEEE" DockPanel.Dock="Bottom" Height="200" VerticalAlignment="Bottom" BorderBrush="Black" BorderThickness="0,1,0,1"/>
+            <Border BorderBrush="Black" BorderThickness="0,1,0,1" DockPanel.Dock="Bottom">
+                <DockPanel Height="200" Background="#FFEEEEEE">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="4*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="2*"/>
+                        </Grid.RowDefinitions>
+                        <Label Content="Rješenje:" Grid.Column="0" Grid.Row="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="22"/>
+                        <Label Content="Z = xy + yx + yx" Grid.Column="1" Grid.Row="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" FontSize="22"/>
+                        <Label Content="Broj iteracija:" Grid.Column="0" Grid.Row="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="22"/>
+                        <Label Content="7" Grid.Column="1" Grid.Row="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" FontSize="22"/>
+                        <Label Content="Provjera duala:" Grid.Column="0" Grid.Row="2" VerticalContentAlignment="Top" HorizontalContentAlignment="Center" FontSize="22"/>
+                        <ListBox Grid.Row="2" Grid.Column="1" Margin="10,10,10,10" d:ItemsSource="{d:SampleData ItemCount=5}"/>
+                    </Grid>
+                </DockPanel>
+            </Border>
             <ContentControl/>
         </DockPanel>
         <DockPanel Grid.Column="2">
             <Label DockPanel.Dock="Top" Content="Postupak" HorizontalContentAlignment="Center" Background="#FFEEEEEE" Height="50" VerticalContentAlignment="Center" FontSize="22" BorderBrush="Black" BorderThickness="1,0,1,1"/>
-            <ListBox DockPanel.Dock="Top"/>
+            <ListBox DockPanel.Dock="Top" d:ItemsSource="{d:SampleData ItemCount=35}"/>
         </DockPanel>
     </Grid>
 </Window>
