@@ -32,6 +32,7 @@
                 <Label Height="1" VerticalAlignment="Top" Margin="0,30,0,0" Background="Black" DockPanel.Dock="Top"/>
                 <Label Content="Metoda početnog rasporeda" DockPanel.Dock="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Top" FontSize="18" Margin="0,30,0,0"/>
                 <ComboBox x:Name="cmbMetodaPocetnogRasporeda" DockPanel.Dock="Top" Height="40" Width="220" VerticalAlignment="Top" Margin="0,20,0,0"/>
+                <Button x:Name="btnPocetniRaspored" Content="Rasporedi teret" DockPanel.Dock="Top" Height="50" Width="170" FontSize="22" Margin="0,30,0,0"/>
                 <Label Content="Metoda optimizacije" DockPanel.Dock="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Top" FontSize="18" Margin="0,30,0,0"/>
                 <ComboBox x:Name="cmbMetodaOptimizacije" DockPanel.Dock="Top" Height="40" Width="220" VerticalAlignment="Top" Margin="0,20,0,0"/>
                 <Button x:Name="btnRijesi" Content="Riješi problem" Height="50" DockPanel.Dock="Top" VerticalAlignment="Top" Margin="0,30,0,0" Width="170" FontSize="22"/>
