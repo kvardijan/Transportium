@@ -29,12 +29,32 @@ namespace Transportium
         {
             DodajOznakeStupaca(brojStupaca);
             DodajOznakeRedova(brojRedova);
-            //DodajTextBoxeve(brojRedova, brojStupaca);
+            DodajTextBoxeve(brojRedova, brojStupaca);
         }
 
         private void DodajTextBoxeve(int brojRedova, int brojStupaca)
         {
-            throw new NotImplementedException();
+            for (int i = 1; i <= brojRedova + 1; i++)
+            {
+                for (int j = 1; j <= brojStupaca + 1; j++)
+                {
+                    if(i != brojRedova + 1 || j != brojStupaca + 1)
+                    {
+                        Grid celija = new Grid();
+                        ContentControl container = new ContentControl();
+                        TextBox textBox = new TextBox();
+
+                        textBox.Name = "C" + i.ToString() + j.ToString();
+                        textBox.Margin = new Thickness(3);
+
+                        container.Content = textBox;
+                        celija.Children.Add(container);
+                        gridTablicaProblema.Children.Add(celija);
+                        Grid.SetColumn(celija, j);
+                        Grid.SetRow(celija, i);
+                    }
+                }
+            }
         }
 
         private void DodajOznakeRedova(int brojRedova)
@@ -51,7 +71,7 @@ namespace Transportium
                 }
                 else
                 {
-                    oznaka.Content = "ai";
+                    oznaka.Content = "bj";
                 }
 
                 oznaka = OblikujLabel(oznaka);
@@ -78,7 +98,7 @@ namespace Transportium
                 }
                 else
                 {
-                    oznaka.Content = "bj";
+                    oznaka.Content = "ai";
                 }
                 oznaka = OblikujLabel(oznaka);
                 container.Content = oznaka;
