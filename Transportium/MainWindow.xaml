@@ -60,7 +60,29 @@
                     </Grid>
                 </DockPanel>
             </Border>
-            <ContentControl x:Name="ccTablica"/>
+            <Grid x:Name="gridTablicaProblema">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+            </Grid>
         </DockPanel>
         <DockPanel Grid.Column="2">
             <Label DockPanel.Dock="Top" Content="Postupak" HorizontalContentAlignment="Center" Background="#FFEEEEEE" Height="50" VerticalContentAlignment="Center" FontSize="22" BorderBrush="Black" BorderThickness="1,0,1,1"/>
