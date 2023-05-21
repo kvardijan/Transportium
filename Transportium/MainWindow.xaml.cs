@@ -189,7 +189,19 @@ namespace Transportium
 
                 if (UpraviteljTablice.ProvjeriKapaciteteIPotrebe())
                 {
-                    
+                    string metodaPocetnogRasporeda = cmbMetodaPocetnogRasporeda.SelectedItem.ToString();
+                    if (metodaPocetnogRasporeda == "Sjeverozapadni kut")
+                    {
+                        UpraviteljTablice.Rasporedi_SZKut();
+                    }
+                    if (metodaPocetnogRasporeda == "Minimalni troškovi")
+                    {
+
+                    }
+                    if (metodaPocetnogRasporeda == "Vogel aproksimacija")
+                    {
+
+                    }
                 }
                 else
                 {

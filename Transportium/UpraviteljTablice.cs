@@ -8,9 +8,9 @@ namespace Transportium
 {
     public static class UpraviteljTablice
     {
-        static TablicaTransporta tablicaTransporta = new TablicaTransporta();
-        private static int brojRedova;
-        private static int brojStupaca;
+        public static TablicaTransporta tablicaTransporta = new TablicaTransporta();
+        public static int brojRedova;
+        public static int brojStupaca;
         public static bool ucitanaTablica = false;
 
         public static void UcitajPodatke(int[] kapacitetiIzvora, int[] potrebeOdredista, int[][] troskoviTransporta)
@@ -84,6 +84,12 @@ namespace Transportium
             if (sumKapacitetiIzvora != sumPotrebeOdredista) ispravno = false;
 
             return ispravno;
+        }
+
+        public static void Rasporedi_SZKut()
+        {
+            PocetniRaspored_SjeveroZapadniKut rasporedivac = new PocetniRaspored_SjeveroZapadniKut();
+            rasporedivac.RjesiProblem();
         }
     }
 }
