@@ -166,8 +166,8 @@ namespace Transportium
         {
             if (ProvjeriVrijednostiTabliceTransporta())
             {
-                PopuniPotrebeOdredista();
                 PopuniKapaciteteIzvora();
+                PopuniPotrebeOdredista();
                 PopuniTroskoveTransporta();
             }
             else
@@ -178,13 +178,27 @@ namespace Transportium
 
         private void PopuniPotrebeOdredista()
         {
-            throw new NotImplementedException();
+            int nRedova = Int32.Parse(txtBrojRedova.Text);
+            int nStupaca = Int32.Parse(txtBrojStupaca.Text);
+
+            for (int i = 1; i <= nStupaca; i++)
+            {
+                TextBox celija = txtBoxeviCelija.Find(x => x.Name == "C" + (nRedova+1).ToString() + i);
+                potrebeOdredista.Add(Int32.Parse(celija.Text));
+            }
         }
 
         private void PopuniKapaciteteIzvora()
         {
-            throw new NotImplementedException();
-        }
+            int nRedova = Int32.Parse(txtBrojRedova.Text);
+            int nStupaca = Int32.Parse(txtBrojStupaca.Text);
+
+            for (int i = 1; i <= nRedova; i++)
+            {
+                TextBox celija = txtBoxeviCelija.Find(x => x.Name == "C" + i + (nStupaca+1).ToString());
+                kapacitetiIzvora.Add(Int32.Parse(celija.Text));
+            }
+        } 
 
         private void PopuniTroskoveTransporta()
         {
