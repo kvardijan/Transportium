@@ -57,6 +57,7 @@
     </ApplicationDefinition>
     <Compile Include="Celija.cs" />
     <Compile Include="TablicaTransporta.cs" />
+    <Compile Include="UpraviteljTablice.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
