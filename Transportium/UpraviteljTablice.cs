@@ -66,5 +66,24 @@ namespace Transportium
                 }
             }
         }
+
+        public static bool ProvjeriKapaciteteIPotrebe()
+        {
+            bool ispravno = true;
+            int sumKapacitetiIzvora = 0;
+            int sumPotrebeOdredista = 0;
+
+            for (int i = 1; i <= brojRedova; i++)
+            {
+                sumKapacitetiIzvora += tablicaTransporta.KapacitetiIzvora[i];
+            }
+            for (int i = 1; i <= brojStupaca; i++)
+            {
+                sumPotrebeOdredista += tablicaTransporta.PotrebeOdredista[i];
+            }
+            if (sumKapacitetiIzvora != sumPotrebeOdredista) ispravno = false;
+
+            return ispravno;
+        }
     }
 }

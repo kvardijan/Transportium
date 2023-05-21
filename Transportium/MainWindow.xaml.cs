@@ -186,6 +186,15 @@ namespace Transportium
                 if (UpraviteljTablice.ucitanaTablica) UpraviteljTablice.OcistiTablicu();
                 UpraviteljTablice.DefinirajRedoveIStupce(nRedova, nStupaca);
                 UpraviteljTablice.UcitajPodatke(kapacitetiIzvora, potrebeOdredista, troskoviTransporta);
+
+                if (UpraviteljTablice.ProvjeriKapaciteteIPotrebe())
+                {
+                    MessageBox.Show("uspjeh");
+                }
+                else
+                {
+                    MessageBox.Show("Provjerite unesene vrijednosti kapaciteta izvora i potreba odredista.", "Transportni problem nije zatvoren!");
+                }
             }
             else
             {
