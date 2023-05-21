@@ -20,6 +20,7 @@ namespace Transportium
     /// </summary>
     public partial class MainWindow : Window
     {
+        private List<TextBox> txtBoxeviCelija = new List<TextBox>();
         public MainWindow()
         {
             InitializeComponent();
@@ -52,6 +53,8 @@ namespace Transportium
                         gridTablicaProblema.Children.Add(celija);
                         Grid.SetColumn(celija, j);
                         Grid.SetRow(celija, i);
+
+                        txtBoxeviCelija.Add(textBox);
                     }
                 }
             }
@@ -121,6 +124,7 @@ namespace Transportium
         private void OcistiGrid()
         {
             gridTablicaProblema.Children.Clear();
+            txtBoxeviCelija.Clear();
         }
 
         private void btnGenerirajTablicu_Click(object sender, RoutedEventArgs e)
@@ -131,6 +135,8 @@ namespace Transportium
                 int nRedova = Int32.Parse(txtBrojRedova.Text);
                 int nStupaca = Int32.Parse(txtBrojStupaca.Text);
                 GenerirajTablicu(nRedova, nStupaca);
+                cmbMetodaPocetnogRasporeda.IsEnabled = true;
+                btnPocetniRaspored.IsEnabled = true;
             }
             else
             {
@@ -148,6 +154,54 @@ namespace Transportium
                 && nRedova > 1 && nRedova <= 10 && nStupaca > 1 && nStupaca <= 10)
             {
                 ispravno = true;
+            }
+
+            return ispravno;
+        }
+
+        List<int> potrebeOdredista = new List<int>();
+        List<int> kapacitetiIzvora = new List<int>();
+        List<List<int>> troskoviTransporta = new List<List<int>>();
+        private void btnPocetniRaspored_Click(object sender, RoutedEventArgs e)
+        {
+            if (ProvjeriVrijednostiTabliceTransporta())
+            {
+                PopuniPotrebeOdredista();
+                PopuniKapaciteteIzvora();
+                PopuniTroskoveTransporta();
+            }
+            else
+            {
+                MessageBox.Show("Provjerite unesene vrijednosti u tablici.", "Neispravni podaci tablice!");
+            }
+        }
+
+        private void PopuniPotrebeOdredista()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void PopuniKapaciteteIzvora()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void PopuniTroskoveTransporta()
+        {
+            throw new NotImplementedException();
+        }
+
+        private bool ProvjeriVrijednostiTabliceTransporta()
+        {
+            bool ispravno = true;
+
+            foreach (var celija in txtBoxeviCelija)
+            {
+                int trosak;
+                if (!Int32.TryParse(celija.Text, out trosak) || trosak <= 0)
+                {
+                    ispravno = false;
+                }
             }
 
             return ispravno;

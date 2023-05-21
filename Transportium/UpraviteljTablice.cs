@@ -8,7 +8,7 @@ namespace Transportium
 {
     public static class UpraviteljTablice
     {
-        static TablicaTransporta tablicaTransporta;
+        static TablicaTransporta tablicaTransporta = new TablicaTransporta();
 
         public static void UcitajPodatke(List<int> kapacitetiIzvora, List<int> potrebeOdredista, List<List<int>> troskoviTransporta)
         {
