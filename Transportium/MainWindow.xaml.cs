@@ -189,7 +189,7 @@ namespace Transportium
 
                 if (UpraviteljTablice.ProvjeriKapaciteteIPotrebe())
                 {
-                    MessageBox.Show("uspjeh");
+                    
                 }
                 else
                 {
