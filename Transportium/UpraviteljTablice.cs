@@ -9,39 +9,47 @@ namespace Transportium
     public static class UpraviteljTablice
     {
         static TablicaTransporta tablicaTransporta = new TablicaTransporta();
+        private static int brojRedova;
+        private static int brojStupaca;
 
-        public static void UcitajPodatke(List<int> kapacitetiIzvora, List<int> potrebeOdredista, List<List<int>> troskoviTransporta)
+        public static void UcitajPodatke(int[] kapacitetiIzvora, int[] potrebeOdredista, int[][] troskoviTransporta)
         {
             UcitajKapaciteteIzvora(kapacitetiIzvora);
             UcitajPotrebeOdredista(potrebeOdredista);
             UcitajTroskoveTransporta(troskoviTransporta);
         }
 
-        private static void UcitajTroskoveTransporta(List<List<int>> troskoviTransporta)
+        private static void UcitajTroskoveTransporta(int[][] troskoviTransporta)
         {
-            for (int i = 1; i <= troskoviTransporta.Count; i++)
+            for (int i = 1; i <= brojRedova; i++)
             {
-                for (int j = 1; j <= troskoviTransporta[i].Count; j++)
+                for (int j = 1; j <= brojStupaca; j++)
                 {
                     tablicaTransporta.TablicaCelija[i][j].TrosakPrijevoza = troskoviTransporta[i][j];
                 }
             }
         }
 
-        private static void UcitajPotrebeOdredista(List<int> potrebeOdredista)
+        private static void UcitajPotrebeOdredista(int[] potrebeOdredista)
         {
-            for (int i = 1; i <= potrebeOdredista.Count; i++)
+            for (int i = 1; i <= brojStupaca; i++)
             {
-                tablicaTransporta.PotrebeOdredista[i] = potrebeOdredista[1];
+                tablicaTransporta.PotrebeOdredista[i] = potrebeOdredista[i];
             }
         }
 
-        private static void UcitajKapaciteteIzvora(List<int> kapacitetiIzvora)
+        private static void UcitajKapaciteteIzvora(int[] kapacitetiIzvora)
         {
-            for (int i = 1; i <= kapacitetiIzvora.Count; i++)
+            for (int i = 1; i <= brojRedova; i++)
             {
                 tablicaTransporta.KapacitetiIzvora[i] = kapacitetiIzvora[i];
             }
+        }
+
+        public static void DefinirajRedoveIStupce(int nRedova, int nStupaca)
+        {
+            brojRedova = nRedova;
+            brojStupaca = nStupaca;
         }
     }
 }

@@ -8,8 +8,20 @@ namespace Transportium
 {
     public class TablicaTransporta
     {
-        public List<int> KapacitetiIzvora { get; set; }
-        public List<int> PotrebeOdredista { get; set; }
-        public List<List<Celija>> TablicaCelija { get; set; }
+        public int[] KapacitetiIzvora { get; set; } = new int[11];
+        public int[] PotrebeOdredista { get; set; } = new int[11];
+        public Celija[][] TablicaCelija { get; set; } = new Celija[11][];
+
+        public TablicaTransporta()
+        {
+            for (int i = 0; i < TablicaCelija.Length; i++)
+            {
+                TablicaCelija[i] = new Celija[11];
+                for (int j = 0; j < TablicaCelija[i].Length; j++)
+                {
+                    TablicaCelija[i][j] = new Celija();
+                }
+            }
+        }
     }
 }

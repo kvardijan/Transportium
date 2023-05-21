@@ -147,8 +147,8 @@ namespace Transportium
 
         private void OcistiVarijable()
         {
-            potrebeOdredista.Clear();
-            kapacitetiIzvora.Clear();
+            Array.Clear(potrebeOdredista, 0, potrebeOdredista.Length);
+            Array.Clear(kapacitetiIzvora, 0, kapacitetiIzvora.Length);
             for (int i = 0; i < troskoviTransporta.Length; i++)
             {
                 troskoviTransporta[i] = new int[11];
@@ -170,16 +170,22 @@ namespace Transportium
             return ispravno;
         }
 
-        List<int> potrebeOdredista = new List<int>();
-        List<int> kapacitetiIzvora = new List<int>();
+        int[] potrebeOdredista = new int[11];
+        int[] kapacitetiIzvora = new int[11];
         int[][] troskoviTransporta = new int[11][];
         private void btnPocetniRaspored_Click(object sender, RoutedEventArgs e)
         {
+            int nRedova = Int32.Parse(txtBrojRedova.Text);
+            int nStupaca = Int32.Parse(txtBrojStupaca.Text);
             if (ProvjeriVrijednostiTabliceTransporta())
             {
                 PopuniKapaciteteIzvora();
                 PopuniPotrebeOdredista();
                 PopuniTroskoveTransporta();
+
+                UpraviteljTablice.DefinirajRedoveIStupce(nRedova, nStupaca);
+                UpraviteljTablice.UcitajPodatke(kapacitetiIzvora, potrebeOdredista, troskoviTransporta);
+                MessageBox.Show("uspe");
             }
             else
             {
@@ -195,7 +201,7 @@ namespace Transportium
             for (int i = 1; i <= nStupaca; i++)
             {
                 TextBox celija = txtBoxeviCelija.Find(x => x.Name == "C" + (nRedova+1).ToString() + i);
-                potrebeOdredista.Add(Int32.Parse(celija.Text));
+                potrebeOdredista[i] = Int32.Parse(celija.Text);
             }
         }
 
@@ -207,7 +213,7 @@ namespace Transportium
             for (int i = 1; i <= nRedova; i++)
             {
                 TextBox celija = txtBoxeviCelija.Find(x => x.Name == "C" + i + (nStupaca+1).ToString());
-                kapacitetiIzvora.Add(Int32.Parse(celija.Text));
+                kapacitetiIzvora[i] = Int32.Parse(celija.Text);
             }
         } 
 
