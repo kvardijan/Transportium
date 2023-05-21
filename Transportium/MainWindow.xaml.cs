@@ -132,6 +132,7 @@ namespace Transportium
             if (ProvjeriUnosRedovaStupaca())
             {
                 OcistiGrid();
+                OcistiVarijable();
                 int nRedova = Int32.Parse(txtBrojRedova.Text);
                 int nStupaca = Int32.Parse(txtBrojStupaca.Text);
                 GenerirajTablicu(nRedova, nStupaca);
@@ -141,6 +142,16 @@ namespace Transportium
             else
             {
                 MessageBox.Show("Broj redova i broj stupaca moraju biti cjelobrojne vrijednosti od 2 do 10.", "Provjerite podatke!");
+            }
+        }
+
+        private void OcistiVarijable()
+        {
+            potrebeOdredista.Clear();
+            kapacitetiIzvora.Clear();
+            for (int i = 0; i < troskoviTransporta.Length; i++)
+            {
+                troskoviTransporta[i] = new int[11];
             }
         }
 
@@ -161,7 +172,7 @@ namespace Transportium
 
         List<int> potrebeOdredista = new List<int>();
         List<int> kapacitetiIzvora = new List<int>();
-        List<List<int>> troskoviTransporta = new List<List<int>>();
+        int[][] troskoviTransporta = new int[11][];
         private void btnPocetniRaspored_Click(object sender, RoutedEventArgs e)
         {
             if (ProvjeriVrijednostiTabliceTransporta())
@@ -202,7 +213,25 @@ namespace Transportium
 
         private void PopuniTroskoveTransporta()
         {
-            throw new NotImplementedException();
+            int nRedova = Int32.Parse(txtBrojRedova.Text);
+            int nStupaca = Int32.Parse(txtBrojStupaca.Text);
+            InicijalizirajArrayTroskovaTransporta();
+            for (int i = 1; i <= nRedova; i++)
+            {
+                for (int j = 1; j <= nStupaca; j++)
+                {
+                    TextBox celija = txtBoxeviCelija.Find(x => x.Name == "C" + i + j);
+                    troskoviTransporta[i][j] = Int32.Parse(celija.Text);
+                }
+            }
+        }
+
+        private void InicijalizirajArrayTroskovaTransporta()
+        {
+            for (int i = 0; i < troskoviTransporta.Length; i++)
+            {
+                troskoviTransporta[i] = new int[11];
+            }
         }
 
         private bool ProvjeriVrijednostiTabliceTransporta()
