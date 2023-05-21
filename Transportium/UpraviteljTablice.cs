@@ -19,17 +19,29 @@ namespace Transportium
 
         private static void UcitajTroskoveTransporta(List<List<int>> troskoviTransporta)
         {
-            throw new NotImplementedException();
+            for (int i = 1; i <= troskoviTransporta.Count; i++)
+            {
+                for (int j = 1; j <= troskoviTransporta[i].Count; j++)
+                {
+                    tablicaTransporta.TablicaCelija[i][j].TrosakPrijevoza = troskoviTransporta[i][j];
+                }
+            }
         }
 
         private static void UcitajPotrebeOdredista(List<int> potrebeOdredista)
         {
-            throw new NotImplementedException();
+            for (int i = 1; i <= potrebeOdredista.Count; i++)
+            {
+                tablicaTransporta.PotrebeOdredista[i] = potrebeOdredista[1];
+            }
         }
 
         private static void UcitajKapaciteteIzvora(List<int> kapacitetiIzvora)
         {
-            throw new NotImplementedException();
+            for (int i = 1; i <= kapacitetiIzvora.Count; i++)
+            {
+                tablicaTransporta.KapacitetiIzvora[i] = kapacitetiIzvora[i];
+            }
         }
     }
 }
