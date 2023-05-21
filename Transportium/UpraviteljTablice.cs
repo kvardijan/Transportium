@@ -11,12 +11,14 @@ namespace Transportium
         static TablicaTransporta tablicaTransporta = new TablicaTransporta();
         private static int brojRedova;
         private static int brojStupaca;
+        public static bool ucitanaTablica = false;
 
         public static void UcitajPodatke(int[] kapacitetiIzvora, int[] potrebeOdredista, int[][] troskoviTransporta)
         {
             UcitajKapaciteteIzvora(kapacitetiIzvora);
             UcitajPotrebeOdredista(potrebeOdredista);
             UcitajTroskoveTransporta(troskoviTransporta);
+            ucitanaTablica=true;
         }
 
         private static void UcitajTroskoveTransporta(int[][] troskoviTransporta)
@@ -50,6 +52,19 @@ namespace Transportium
         {
             brojRedova = nRedova;
             brojStupaca = nStupaca;
+        }
+
+        public static void OcistiTablicu()
+        {
+            Array.Clear(tablicaTransporta.PotrebeOdredista, 0, tablicaTransporta.PotrebeOdredista.Length);
+            Array.Clear(tablicaTransporta.KapacitetiIzvora, 0, tablicaTransporta.KapacitetiIzvora.Length);
+            for (int i = 0; i < tablicaTransporta.TablicaCelija.Length; i++)
+            {
+                for (int j = 0; j < tablicaTransporta.TablicaCelija[i].Length; j++)
+                {
+                    tablicaTransporta.TablicaCelija[i][j] = new Celija();
+                }
+            }
         }
     }
 }

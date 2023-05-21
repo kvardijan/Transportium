@@ -183,9 +183,9 @@ namespace Transportium
                 PopuniPotrebeOdredista();
                 PopuniTroskoveTransporta();
 
+                if (UpraviteljTablice.ucitanaTablica) UpraviteljTablice.OcistiTablicu();
                 UpraviteljTablice.DefinirajRedoveIStupce(nRedova, nStupaca);
                 UpraviteljTablice.UcitajPodatke(kapacitetiIzvora, potrebeOdredista, troskoviTransporta);
-                MessageBox.Show("uspe");
             }
             else
             {
