@@ -123,15 +123,34 @@ namespace Transportium
             gridTablicaProblema.Children.Clear();
         }
 
-
-
-
         private void btnGenerirajTablicu_Click(object sender, RoutedEventArgs e)
         {
-            OcistiGrid();
-            int nRedova = Int32.Parse(txtBrojRedova.Text);
-            int nStupaca = Int32.Parse(txtBrojStupaca.Text);
-            GenerirajTablicu(nRedova,nStupaca);
+            if (ProvjeriUnosRedovaStupaca())
+            {
+                OcistiGrid();
+                int nRedova = Int32.Parse(txtBrojRedova.Text);
+                int nStupaca = Int32.Parse(txtBrojStupaca.Text);
+                GenerirajTablicu(nRedova, nStupaca);
+            }
+            else
+            {
+                MessageBox.Show("Broj redova i broj stupaca moraju biti cjelobrojne vrijednosti od 2 do 10.", "Provjerite podatke!");
+            }
+        }
+
+        private bool ProvjeriUnosRedovaStupaca()
+        {
+            bool ispravno = false;
+            int nRedova;
+            int nStupaca;
+
+            if (int.TryParse(txtBrojRedova.Text, out nRedova) && int.TryParse(txtBrojStupaca.Text, out nStupaca)
+                && nRedova > 1 && nRedova <= 10 && nStupaca > 1 && nStupaca <= 10)
+            {
+                ispravno = true;
+            }
+
+            return ispravno;
         }
     }
 }
