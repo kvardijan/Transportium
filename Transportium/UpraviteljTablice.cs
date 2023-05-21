@@ -58,6 +58,7 @@ namespace Transportium
         {
             Array.Clear(tablicaTransporta.PotrebeOdredista, 0, tablicaTransporta.PotrebeOdredista.Length);
             Array.Clear(tablicaTransporta.KapacitetiIzvora, 0, tablicaTransporta.KapacitetiIzvora.Length);
+            tablicaTransporta.SumaKolicine = 0;
             for (int i = 0; i < tablicaTransporta.TablicaCelija.Length; i++)
             {
                 for (int j = 0; j < tablicaTransporta.TablicaCelija[i].Length; j++)
@@ -82,14 +83,14 @@ namespace Transportium
                 sumPotrebeOdredista += tablicaTransporta.PotrebeOdredista[i];
             }
             if (sumKapacitetiIzvora != sumPotrebeOdredista) ispravno = false;
-
+            tablicaTransporta.SumaKolicine = sumPotrebeOdredista;
             return ispravno;
         }
 
         public static void Rasporedi_SZKut()
         {
             PocetniRaspored_SjeveroZapadniKut rasporedivac = new PocetniRaspored_SjeveroZapadniKut();
-            rasporedivac.RjesiProblem();
+            rasporedivac.RjesiRasporedivanje();
         }
     }
 }

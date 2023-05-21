@@ -189,10 +189,11 @@ namespace Transportium
 
                 if (UpraviteljTablice.ProvjeriKapaciteteIPotrebe())
                 {
-                    string metodaPocetnogRasporeda = cmbMetodaPocetnogRasporeda.SelectedItem.ToString();
+                    var metodaPocetnogRasporeda = (cmbMetodaPocetnogRasporeda.SelectedItem as ComboBoxItem).Content.ToString();
                     if (metodaPocetnogRasporeda == "Sjeverozapadni kut")
                     {
                         UpraviteljTablice.Rasporedi_SZKut();
+                        IspisiRezultatRasporedivanja();
                     }
                     if (metodaPocetnogRasporeda == "Minimalni troškovi")
                     {
@@ -211,6 +212,21 @@ namespace Transportium
             else
             {
                 MessageBox.Show("Provjerite unesene vrijednosti u tablici.", "Neispravni podaci tablice!");
+            }
+        }
+
+        private void IspisiRezultatRasporedivanja()
+        {
+            int nRedova = Int32.Parse(txtBrojRedova.Text);
+            int nStupaca = Int32.Parse(txtBrojStupaca.Text);
+
+            for (int i = 1; i <= nRedova; i++)
+            {
+                for (int j = 1; j <= nStupaca; j++)
+                {
+                    TextBox celija = txtBoxeviCelija.Find(x => x.Name == "C" + i + j);
+                    celija.Text += "/" + UpraviteljTablice.tablicaTransporta.TablicaCelija[i][j].KolicinaTereta;
+                }
             }
         }
 
