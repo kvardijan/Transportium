@@ -93,5 +93,11 @@ namespace Transportium
             PocetniRaspored_SjeveroZapadniKut rasporedivac = new PocetniRaspored_SjeveroZapadniKut();
             return rasporedivac.RjesiRasporedivanje();
         }
+
+        public static string Rasporedi_MinCost()
+        {
+            PocetniRaspored_MinimalniTroskovi rasporedivac = new PocetniRaspored_MinimalniTroskovi();
+
+        }
     }
 }
