@@ -10,5 +10,6 @@ namespace Transportium
     {
         public int TrosakPrijevoza { get; set; }
         public int KolicinaTereta { get; set; }
+        public bool Zauzeto { get; set; } = false;
     }
 }

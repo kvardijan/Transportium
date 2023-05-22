@@ -192,7 +192,7 @@ namespace Transportium
                     var metodaPocetnogRasporeda = (cmbMetodaPocetnogRasporeda.SelectedItem as ComboBoxItem).Content.ToString();
                     if (metodaPocetnogRasporeda == "Sjeverozapadni kut")
                     {
-                        UpraviteljTablice.Rasporedi_SZKut();
+                        lblRjesenje.Content = UpraviteljTablice.Rasporedi_SZKut();
                         IspisiRezultatRasporedivanja();
                     }
                     if (metodaPocetnogRasporeda == "Minimalni troškovi")
