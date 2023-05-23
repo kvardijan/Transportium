@@ -14,7 +14,7 @@ namespace Transportium
         List<int> slobodniRedovi = new List<int>();
         List<int> slobodniStupci = new List<int>();
 
-        public string RjesiRasporedivanje()
+        public void RjesiRasporedivanje()
         {
             //ResetirajKolicine();
             DodajKolicine();
@@ -40,8 +40,6 @@ namespace Transportium
                 if (kolicineIzvora[red] == 0) slobodniRedovi.Remove(red);
                 if (kolicineOdredista[stupac] == 0) slobodniStupci.Remove(stupac);
             } while (sumaKolicine < UpraviteljTablice.tablicaTransporta.SumaKolicine);
-
-            return IzracunajPocetniZ();
         }
 
         private PoljeNajmanjegTroska OdrediPoljeNajmanjegTroska()
