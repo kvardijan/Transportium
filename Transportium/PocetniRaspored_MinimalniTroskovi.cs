@@ -129,13 +129,6 @@ namespace Transportium
             Array.Clear(kolicineOdredista, 0, kolicineOdredista.Length);
         }*/
 
-        private string IzracunajPocetniZ()
-        {
-            string pocetniZ = "Z = ";
-
-            return pocetniZ;
-        }
-
         private struct PoljeNajmanjegTroska
         {
             public int trosak;

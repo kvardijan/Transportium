@@ -88,16 +88,46 @@ namespace Transportium
             return ispravno;
         }
 
+        private static string IzracunajZ()
+        {
+            string Z = "Z = ";
+            bool prvi = true;
+            for (int i = 1; i <= UpraviteljTablice.brojRedova; i++)
+            {
+                for (int j = 1; j <= UpraviteljTablice.brojStupaca; j++)
+                {
+                    Celija celija = UpraviteljTablice.tablicaTransporta.TablicaCelija[i][j];
+                    if (celija.Zauzeto)
+                    {
+                        if (!prvi)
+                        {
+                            Z += "+ " + celija.TrosakPrijevoza + "*" + celija.KolicinaTereta + " ";
+                        }
+                        else
+                        {
+                            Z += celija.TrosakPrijevoza + "*" + celija.KolicinaTereta + " ";
+                            prvi = false;
+                        }
+                        UpraviteljTablice.tablicaTransporta.Z += celija.TrosakPrijevoza * celija.KolicinaTereta;
+                    }
+                }
+            }
+            Z += "= " + UpraviteljTablice.tablicaTransporta.Z;
+            return Z;
+        }
+
         public static string Rasporedi_SZKut()
         {
             PocetniRaspored_SjeveroZapadniKut rasporedivac = new PocetniRaspored_SjeveroZapadniKut();
-            return rasporedivac.RjesiRasporedivanje();
+            rasporedivac.RjesiRasporedivanje();
+            return IzracunajZ();
         }
 
         public static string Rasporedi_MinCost()
         {
             PocetniRaspored_MinimalniTroskovi rasporedivac = new PocetniRaspored_MinimalniTroskovi();
-            return rasporedivac.RjesiRasporedivanje();
+            rasporedivac.RjesiRasporedivanje();
+            return IzracunajZ();
         }
     }
 }
