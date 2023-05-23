@@ -51,10 +51,10 @@ namespace Transportium
             };
             int brojacR = 1;
 
-            for (int i = slobodniRedovi.First(); brojacR <= slobodniRedovi.Count; i = slobodniRedovi[brojacR])
+            for (int i = slobodniRedovi.First(); brojacR <= slobodniRedovi.Count;)
             {
                 int brojacS = 1;
-                for (int j = slobodniStupci.First(); brojacS <= slobodniStupci.Count; j = slobodniStupci[brojacS])
+                for (int j = slobodniStupci.First(); brojacS <= slobodniStupci.Count;)
                 {
                     Celija celija = UpraviteljTablice.tablicaTransporta.TablicaCelija[i][j];
                     if (celija.TrosakPrijevoza < poljeNajmanjegTroska.trosak)
@@ -76,8 +76,10 @@ namespace Transportium
                         }
                     }
                     brojacS++;
+                    if (brojacS <= slobodniStupci.Count) j = slobodniStupci[brojacS - 1];
                 }
                 brojacR++;
+                if (brojacR <= slobodniRedovi.Count) i = slobodniRedovi[brojacR - 1];
             }
 
             return poljeNajmanjegTroska;

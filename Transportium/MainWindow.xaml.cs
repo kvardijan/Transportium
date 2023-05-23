@@ -200,7 +200,8 @@ namespace Transportium
                     }
                     if (metodaPocetnogRasporeda == "Minimalni troškovi")
                     {
-
+                        lblRjesenje.Content = UpraviteljTablice.Rasporedi_MinCost();
+                        IspisiRezultatRasporedivanja();
                     }
                     if (metodaPocetnogRasporeda == "Vogel aproksimacija")
                     {
