@@ -13,7 +13,7 @@ namespace Transportium
         int sumaKolicine;
         public string RjesiRasporedivanje()
         {
-            ResetirajKolicine();
+            //ResetirajKolicine();
             DodajKolicine();
             sumaKolicine = 0;
             int indexRed = 1;
@@ -85,10 +85,10 @@ namespace Transportium
             }
         }
 
-        private void ResetirajKolicine()
+/*        private void ResetirajKolicine()
         {
             Array.Clear(kolicineIzvora, 0, kolicineIzvora.Length);
             Array.Clear(kolicineOdredista, 0, kolicineOdredista.Length);
-        }
+        }*/
     }
 }

@@ -97,7 +97,7 @@ namespace Transportium
         public static string Rasporedi_MinCost()
         {
             PocetniRaspored_MinimalniTroskovi rasporedivac = new PocetniRaspored_MinimalniTroskovi();
-
+            return rasporedivac.RjesiRasporedivanje();
         }
     }
 }
