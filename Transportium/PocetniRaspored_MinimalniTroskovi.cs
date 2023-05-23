@@ -26,10 +26,19 @@ namespace Transportium
             do
             {
                 poljeNajmanjegTroska = OdrediPoljeNajmanjegTroska();
-                //vidi je li kolicina stupca ili reda manja i stavi tolko
-                //oduzmi od kolicine
-                //makni red ili stupac iz liste slobodnih
+                int red = poljeNajmanjegTroska.indexReda;
+                int stupac = poljeNajmanjegTroska.indexStupca;
+                kolicina = poljeNajmanjegTroska.maxTeret;
 
+                UpraviteljTablice.tablicaTransporta.TablicaCelija[red][stupac].KolicinaTereta = kolicina;
+                UpraviteljTablice.tablicaTransporta.TablicaCelija[red][stupac].Zauzeto = true;
+
+                kolicineIzvora[red] -= kolicina;
+                kolicineOdredista[stupac] -= kolicina;
+                sumaKolicine += kolicina;
+
+                if (kolicineIzvora[red] == 0) slobodniRedovi.Remove(red);
+                if (kolicineOdredista[stupac] == 0) slobodniStupci.Remove(stupac);
             } while (sumaKolicine < UpraviteljTablice.tablicaTransporta.SumaKolicine);
 
             return IzracunajPocetniZ();
