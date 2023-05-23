@@ -35,6 +35,7 @@ namespace Transportium
 
         private void DodajTextBoxeve(int brojRedova, int brojStupaca)
         {
+            int tabIndex = 1;
             for (int i = 1; i <= brojRedova + 1; i++)
             {
                 for (int j = 1; j <= brojStupaca + 1; j++)
@@ -47,6 +48,7 @@ namespace Transportium
 
                         textBox.Name = "C" + i.ToString() + j.ToString();
                         textBox.Margin = new Thickness(3);
+                        KeyboardNavigation.SetTabIndex(textBox, tabIndex);
 
                         container.Content = textBox;
                         celija.Children.Add(container);
@@ -55,6 +57,7 @@ namespace Transportium
                         Grid.SetRow(celija, i);
 
                         txtBoxeviCelija.Add(textBox);
+                        tabIndex++;
                     }
                 }
             }
