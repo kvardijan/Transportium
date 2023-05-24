@@ -37,7 +37,47 @@ namespace Transportium
 
         private void RaspodjeliPreostaliTeret()
         {
-            throw new NotImplementedException();
+            if (slobodniRedovi.Count == 1)
+            {
+                int indexReda = slobodniRedovi.First();
+                foreach (var indexStupca in slobodniStupci)
+                {
+                    StaviKolicinuNaRelaciju(indexReda, indexStupca);
+                }
+            }
+            else
+            {
+                int indexStupca = slobodniStupci.First();
+                foreach (var indexReda in slobodniRedovi)
+                {
+                    StaviKolicinuNaRelaciju(indexReda, indexStupca);
+                }
+            }
+        }
+
+        private void StaviKolicinuNaRelaciju(int indexReda, int indexStupca)
+        {
+            int kolicina = IzracunajKolicinuTeretaZaStaviti(indexReda, indexStupca);
+            UpraviteljTablice.tablicaTransporta.TablicaCelija[indexReda][indexStupca]
+                .KolicinaTereta = kolicina;
+            UpraviteljTablice.tablicaTransporta.TablicaCelija[indexReda][indexStupca].Zauzeto = true;
+            kolicineIzvora[indexReda] -= kolicina;
+            kolicineOdredista[indexStupca] -= kolicina;
+            sumaKolicine += kolicina;
+        }
+
+        private int IzracunajKolicinuTeretaZaStaviti(int indexReda, int indexStupca)
+        {
+            int kolicina;
+            if (kolicineIzvora[indexReda] > kolicineOdredista[indexStupca])
+            {
+                kolicina = kolicineOdredista[indexStupca];
+            }
+            else
+            {
+                kolicina = kolicineIzvora[indexReda];
+            }
+            return kolicina;
         }
 
         private bool PostojiSamoJedanRedIliStupac()
