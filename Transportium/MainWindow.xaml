@@ -58,7 +58,9 @@
                             <RowDefinition Height="2*"/>
                         </Grid.RowDefinitions>
                         <Label Content="Rješenje:" Grid.Column="0" Grid.Row="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="22"/>
-                        <Label x:Name="lblRjesenje" Content="Z = xy + yx + yx" Grid.Column="1" Grid.Row="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" FontSize="22"/>
+                        <Viewbox Grid.Column="1" Grid.Row="0">
+                            <Label x:Name="lblRjesenje" Content="Z = xy + yx + yx" Grid.Column="1" Grid.Row="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"/>
+                        </Viewbox>
                         <Label Content="Broj iteracija:" Grid.Column="0" Grid.Row="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="22"/>
                         <Label x:Name="lblBrojIteracija" Content="7" Grid.Column="1" Grid.Row="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" FontSize="22"/>
                         <Label Content="Provjera duala:" Grid.Column="0" Grid.Row="2" VerticalContentAlignment="Top" HorizontalContentAlignment="Center" FontSize="22"/>
