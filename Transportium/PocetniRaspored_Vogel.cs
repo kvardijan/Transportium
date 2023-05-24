@@ -18,6 +18,36 @@ namespace Transportium
         {
             DodajKolicine();
             DodajSlobodneRedoveStupce();
+            sumaKolicine = 0;
+            int kolicina;
+            OdabranoPolje odabranoPolje;
+
+            do
+            {
+                if (PostojiSamoJedanRedIliStupac())
+                {
+                    RaspodjeliPreostaliTeret();
+                }
+                else
+                {
+                    odabranoPolje = OdaberiPolje();
+                }
+            } while (sumaKolicine < UpraviteljTablice.tablicaTransporta.SumaKolicine);
+        }
+
+        private void RaspodjeliPreostaliTeret()
+        {
+            throw new NotImplementedException();
+        }
+
+        private bool PostojiSamoJedanRedIliStupac()
+        {
+            return slobodniRedovi.Count == 1 || slobodniStupci.Count == 1;
+        }
+
+        private OdabranoPolje OdaberiPolje()
+        {
+            throw new NotImplementedException();
         }
 
         private void DodajKolicine()
@@ -42,6 +72,11 @@ namespace Transportium
             {
                 slobodniStupci.Add(i);
             }
+        }
+
+        struct OdabranoPolje
+        {
+
         }
     }
 }
