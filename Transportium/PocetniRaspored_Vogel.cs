@@ -64,6 +64,9 @@ namespace Transportium
             kolicineIzvora[indexReda] -= kolicina;
             kolicineOdredista[indexStupca] -= kolicina;
             sumaKolicine += kolicina;
+
+            if (kolicineIzvora[indexReda] == 0) slobodniRedovi.Remove(indexReda); //ovo bude mozda problem jer removeam element iz foreach petlje gore
+            if (kolicineOdredista[indexStupca] == 0) slobodniStupci.Remove(indexStupca);
         }
 
         private int IzracunajKolicinuTeretaZaStaviti(int indexReda, int indexStupca)
@@ -87,7 +90,57 @@ namespace Transportium
 
         private OdabranoPolje OdaberiPolje()
         {
-            throw new NotImplementedException();
+            OdabranoPolje odabranoPolje = new OdabranoPolje
+            {
+                vogelIndex = int.MinValue
+            };
+            odabranoPolje = ProdiKrozRedove(odabranoPolje);
+
+            return odabranoPolje;
+        }
+
+        private OdabranoPolje ProdiKrozRedove(OdabranoPolje odabranoPolje)
+        {
+            int brojacR = 1;
+            for (int i = slobodniRedovi.First(); brojacR <= slobodniRedovi.Count;)
+            {
+                int brojacS = 1;
+                List<int> troskovi = new List<int>();
+                int indexOdabranogStupca = 0;
+                int najmanjiTrosak = int.MaxValue;
+
+                for (int j = slobodniStupci.First(); brojacS <= slobodniStupci.Count;)
+                {
+                    int trosakPrijevoza = UpraviteljTablice.tablicaTransporta.TablicaCelija[i][j].TrosakPrijevoza;
+                    troskovi.Add(trosakPrijevoza);
+                    if (trosakPrijevoza < najmanjiTrosak)
+                    {
+                        indexOdabranogStupca = j;
+                    }
+                    else if (trosakPrijevoza == najmanjiTrosak 
+                        && IzracunajKolicinuTeretaZaStaviti(i, j) > odabranoPolje.maxTeret)
+                    {
+                        indexOdabranogStupca = j;
+                    }
+                    brojacS++;
+                    if (brojacS <= slobodniStupci.Count) j = slobodniStupci[brojacS - 1];
+                }
+
+                troskovi.Sort();
+                int rIndex = troskovi[1] - troskovi[0];
+                if (rIndex > odabranoPolje.vogelIndex)
+                {
+                    odabranoPolje.vogelIndex = rIndex;
+                    odabranoPolje.maxTeret = UpraviteljTablice.tablicaTransporta.TablicaCelija[i][indexOdabranogStupca].KolicinaTereta;
+                    odabranoPolje.indexReda = i;
+                    odabranoPolje.indexStupca = indexOdabranogStupca;
+                }
+
+                brojacR++;
+                if (brojacR <= slobodniRedovi.Count) i = slobodniRedovi[brojacR - 1];
+            }
+
+            return odabranoPolje;
         }
 
         private void DodajKolicine()
@@ -116,7 +169,10 @@ namespace Transportium
 
         struct OdabranoPolje
         {
-
+            public int vogelIndex;
+            public int indexReda;
+            public int indexStupca;
+            public int maxTeret;
         }
     }
 }
