@@ -113,15 +113,9 @@ namespace Transportium
                 {
                     int trosakPrijevoza = UpraviteljTablice.tablicaTransporta.TablicaCelija[i][j].TrosakPrijevoza;
                     troskovi.Add(trosakPrijevoza);
-                    if (trosakPrijevoza < najmanjiTrosak)
-                    {
-                        indexOdabranogStupca = j;
-                    }
+                    if (trosakPrijevoza < najmanjiTrosak) indexOdabranogStupca = j;
                     else if (trosakPrijevoza == najmanjiTrosak 
-                        && IzracunajKolicinuTeretaZaStaviti(i, j) > odabranoPolje.maxTeret)
-                    {
-                        indexOdabranogStupca = j;
-                    }
+                        && IzracunajKolicinuTeretaZaStaviti(i, j) > odabranoPolje.maxTeret) indexOdabranogStupca = j;
                     brojacS++;
                     if (brojacS <= slobodniStupci.Count) j = slobodniStupci[brojacS - 1];
                 }
