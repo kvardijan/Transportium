@@ -58,6 +58,7 @@
     <Compile Include="Celija.cs" />
     <Compile Include="PocetniRaspored_MinimalniTroskovi.cs" />
     <Compile Include="PocetniRaspored_SjeveroZapadniKut.cs" />
+    <Compile Include="PocetniRaspored_Vogel.cs" />
     <Compile Include="TablicaTransporta.cs" />
     <Compile Include="UpraviteljTablice.cs" />
     <Page Include="MainWindow.xaml">
