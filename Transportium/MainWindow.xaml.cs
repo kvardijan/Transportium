@@ -205,7 +205,8 @@ namespace Transportium
                     }
                     if (metodaPocetnogRasporeda == "Vogel aproksimacija")
                     {
-
+                        lblRjesenje.Content = UpraviteljTablice.Rasporedi_Vogel();
+                        IspisiRezultatRasporedivanja();
                     }
                 }
                 else

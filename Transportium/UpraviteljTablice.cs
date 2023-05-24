@@ -129,5 +129,12 @@ namespace Transportium
             rasporedivac.RjesiRasporedivanje();
             return IzracunajZ();
         }
+
+        public static string Rasporedi_Vogel()
+        {
+            PocetniRaspored_Vogel rasporedivac = new PocetniRaspored_Vogel();
+            rasporedivac.RjesiRasporedivanje();
+            return IzracunajZ();
+        }
     }
 }
