@@ -383,15 +383,17 @@ namespace Transportium
                 var metodaOptimizacije = (cmbMetodaOptimizacije.SelectedItem as ComboBoxItem).Content.ToString();
                 if (metodaOptimizacije == "Stepping Stone metoda")
                 {
-                    string rjesenje = UpraviteljTablice.SteppingStoneOptimiziraj();
-                    lblRjesenje.Content = rjesenje;
+                    lblRjesenje.Content = UpraviteljTablice.SteppingStoneOptimiziraj();
                     IspisiRezultatOptimizacije();
                     OnemoguciGumbeIspisiRelativneTroskove();
                     BoldajZauzeteRelacije();
                 }
                 if (metodaOptimizacije == "MODI metoda")
                 {
-
+                    lblRjesenje.Content = UpraviteljTablice.MODIOptimiziraj();
+                    IspisiRezultatOptimizacije();
+                    OnemoguciGumbeIspisiRelativneTroskove();
+                    BoldajZauzeteRelacije();
                 }
             }
             else

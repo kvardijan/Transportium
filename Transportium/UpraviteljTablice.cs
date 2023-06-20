@@ -166,6 +166,16 @@ namespace Transportium
             return IzracunajZ();
         }
 
+        public static string MODIOptimiziraj()
+        {
+            Optimizacija_MODI optimizator = new Optimizacija_MODI();
+            do
+            {
+                optimizator.IzvediIteraciju();
+            } while (!optimizator.optimalnoRijesenje);
+            return IzracunajZ();    
+        }
+
         public static int BrojOptimalnihRjesenja()
         {
             int brojac = 0;
