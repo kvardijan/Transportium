@@ -136,5 +136,11 @@ namespace Transportium
             rasporedivac.RjesiRasporedivanje();
             return IzracunajZ();
         }
+
+        public static string SteppingStoneIducaIteracija()
+        {
+            Optimizacija_SteppingStone optimizator = new Optimizacija_SteppingStone();
+            return IzracunajZ();
+        }
     }
 }

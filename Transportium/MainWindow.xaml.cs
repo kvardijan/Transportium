@@ -213,6 +213,7 @@ namespace Transportium
                         IspisiRezultatRasporedivanja();
                     }
                     btnSljedecaIteracija.IsEnabled = true;
+                    cmbMetodaOptimizacije.IsEnabled = true;
                 }
                 else
                 {
@@ -310,7 +311,15 @@ namespace Transportium
         {
             if (ProvjeriRangSustava())
             {
+                var metodaOptimizacije = (cmbMetodaOptimizacije.SelectedItem as ComboBoxItem).Content.ToString();
+                if (metodaOptimizacije == "Stepping Stone metoda")
+                {
 
+                }
+                if (metodaOptimizacije == "MODI metoda")
+                {
+
+                }
             }
             else
             {
