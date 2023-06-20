@@ -19,6 +19,10 @@ namespace Transportium
                 optimalnoRijesenje = true;
                 return;
             }
+            //odredi put za pretovar, odredi kolicinu pretovara pretovari
+            PretovariTeret();
+            //clear relativne troskove
+            OcistiRelativneTroskove();
         }
 
         private void IzracunajRelativneTroskove()
