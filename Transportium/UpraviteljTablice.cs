@@ -28,6 +28,8 @@ namespace Transportium
                 for (int j = 1; j <= brojStupaca; j++)
                 {
                     tablicaTransporta.TablicaCelija[i][j].TrosakPrijevoza = troskoviTransporta[i][j];
+                    tablicaTransporta.TablicaCelija[i][j].Red = i;
+                    tablicaTransporta.TablicaCelija[i][j].Stupac = j;
                 }
             }
         }
