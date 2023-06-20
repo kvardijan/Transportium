@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Transportium
 {
-    public class Optimizacija_MODI
+    public class Optimizacija_MODI : Optimizacija
     {
         public void IzvediIteraciju()
         {
