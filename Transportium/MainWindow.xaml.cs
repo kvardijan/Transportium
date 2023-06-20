@@ -242,8 +242,10 @@ namespace Transportium
             {
                 for (int j = 1; j <= _brojStupaca; j++)
                 {
+                    int teret = UpraviteljTablice.tablicaTransporta.TablicaCelija[i][j].KolicinaTereta;
                     TextBox celija = txtBoxeviCelija.Find(x => x.Name == "C" + i + j);
-                    celija.Text += "/" + UpraviteljTablice.tablicaTransporta.TablicaCelija[i][j].KolicinaTereta;
+                    celija.Text += "/";
+                    if (teret != 0) celija.Text += teret.ToString();
                 }
             }
         }
