@@ -180,13 +180,18 @@ namespace Transportium
         {
             int nRedova = Int32.Parse(txtBrojRedova.Text);
             int nStupaca = Int32.Parse(txtBrojStupaca.Text);
+
+            if (UpraviteljTablice.ucitanaTablica)
+            {
+                UpraviteljTablice.OcistiTablicu();
+                MakniIzracunatiTeret();
+            }
+
             if (ProvjeriVrijednostiTabliceTransporta())
             {
                 PopuniKapaciteteIzvora();
                 PopuniPotrebeOdredista();
                 PopuniTroskoveTransporta();
-
-                if (UpraviteljTablice.ucitanaTablica) UpraviteljTablice.OcistiTablicu();
                 UpraviteljTablice.DefinirajRedoveIStupce(nRedova, nStupaca);
                 UpraviteljTablice.UcitajPodatke(kapacitetiIzvora, potrebeOdredista, troskoviTransporta);
 
@@ -217,6 +222,21 @@ namespace Transportium
             else
             {
                 MessageBox.Show("Provjerite unesene vrijednosti u tablici.", "Neispravni podaci tablice!");
+            }
+        }
+
+        private void MakniIzracunatiTeret()
+        {
+            int nRedova = Int32.Parse(txtBrojRedova.Text);
+            int nStupaca = Int32.Parse(txtBrojStupaca.Text);
+
+            for (int i = 1; i <= nRedova; i++)
+            {
+                for (int j = 1; j <= nStupaca; j++)
+                {
+                    TextBox celija = txtBoxeviCelija.Find(x => x.Name == "C" + i + j);
+                    celija.Text = celija.Text.Split('/')[0];
+                }
             }
         }
 
