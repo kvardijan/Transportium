@@ -92,6 +92,7 @@ namespace Transportium
 
         private static string IzracunajZ()
         {
+            tablicaTransporta.Z = 0;
             string Z = "Z = ";
             bool prvi = true;
             for (int i = 1; i <= UpraviteljTablice.brojRedova; i++)

@@ -315,6 +315,7 @@ namespace Transportium
                 if (metodaOptimizacije == "Stepping Stone metoda")
                 {
                     lblRjesenje.Content = UpraviteljTablice.SteppingStoneIducaIteracija();
+                    IspisiRezultatOptimizacije();
                     if ((string)lblRjesenje.Content == UpraviteljTablice.SteppingStoneIducaIteracija())
                     {
                         MessageBox.Show("Postignuto je optimalno rjesenje.");
@@ -331,6 +332,12 @@ namespace Transportium
             {
                 MessageBox.Show("Rjesavanje degeneracije nije jos implementirano.", "Degeneracija!");
             }
+        }
+
+        private void IspisiRezultatOptimizacije()
+        {
+            MakniIzracunatiTeret();
+            IspisiRezultatRasporedivanja();
         }
 
         private bool ProvjeriRangSustava()

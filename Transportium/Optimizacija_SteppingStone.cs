@@ -17,11 +17,29 @@ namespace Transportium
             //odredi put za pretovar, odredi kolicinu pretovara pretovari
             PretovariTeret();
             //clear relativne troskove
+            OcistiRelativneTroskove();
+        }
+
+        private void OcistiRelativneTroskove()
+        {
+            for (int i = 1; i <= UpraviteljTablice.brojRedova; i++)
+            {
+                for (int j = 1; j <= UpraviteljTablice.brojStupaca; j++)
+                {
+                    if (UpraviteljTablice.tablicaTransporta.TablicaCelija[i][j].RelativniTrosakPrijevoza>0)
+                        UpraviteljTablice.tablicaTransporta.TablicaCelija[i][j].RelativniTrosakPrijevoza = 0;
+                }
+            }
         }
 
         private void PretovariTeret()
         {
-            int maxRelativniTrosak = Int32.MinValue;
+            StozerniElement stozerniElement = new StozerniElement
+            {
+                relativniTrosak = Int32.MinValue,
+                teretPretovara = Int32.MinValue
+            };
+
             for (int i = 1; i <= UpraviteljTablice.brojRedova; i++)
             {
                 for (int j = 1; j <= UpraviteljTablice.brojStupaca; j++)
@@ -29,14 +47,23 @@ namespace Transportium
                     Celija trenutnaCelija = UpraviteljTablice.tablicaTransporta.TablicaCelija[i][j];
 
                     if (trenutnaCelija.RelativniTrosakPrijevoza > 0
-                        && trenutnaCelija.RelativniTrosakPrijevoza >= maxRelativniTrosak)
+                        && trenutnaCelija.RelativniTrosakPrijevoza >= stozerniElement.relativniTrosak)
                     {
                         List<Celija> putPretovara = PronadiZatvoreniPut(trenutnaCelija, new List<Celija>(), true);
                         int kolicinaPretovara = OdrediKolicinuZaPretovariti(putPretovara);
-                        RaspodjeliTeretNaNovuRelaciju(kolicinaPretovara, putPretovara);
+
+                        if(trenutnaCelija.RelativniTrosakPrijevoza > stozerniElement.relativniTrosak
+                            || (trenutnaCelija.RelativniTrosakPrijevoza == stozerniElement.relativniTrosak
+                            && kolicinaPretovara > stozerniElement.teretPretovara))
+                        {
+                            stozerniElement.relativniTrosak = trenutnaCelija.RelativniTrosakPrijevoza;
+                            stozerniElement.teretPretovara = kolicinaPretovara;
+                            stozerniElement.putPretovara = putPretovara;
+                        }   
                     }
                 }
             }
+            RaspodjeliTeretNaNovuRelaciju(stozerniElement.teretPretovara, stozerniElement.putPretovara);
         }
 
         private void RaspodjeliTeretNaNovuRelaciju(int kolicinaPretovara, List<Celija> putPretovara)
@@ -157,6 +184,13 @@ namespace Transportium
             }
             put.Remove(trenutnaCelija); //ako nije pronadjen put, makni trenutnu celiju iz puta
             return null; //ako nije pronadjen put, vrati null
+        }
+
+        public struct StozerniElement
+        {
+            public int relativniTrosak;
+            public int teretPretovara;
+            public List<Celija> putPretovara;
         }
     }
 }
