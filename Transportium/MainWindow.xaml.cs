@@ -144,6 +144,7 @@ namespace Transportium
                 GenerirajTablicu();
                 cmbMetodaPocetnogRasporeda.IsEnabled = true;
                 btnPocetniRaspored.IsEnabled = true;
+                lblBrojRjesenja.Content = "";
             }
             else
             {
@@ -183,6 +184,7 @@ namespace Transportium
             {
                 UpraviteljTablice.OcistiTablicu();
                 MakniIzracunatiTeret();
+                lblBrojRjesenja.Content = "";
             }
 
             if (ProvjeriVrijednostiTabliceTransporta())
@@ -323,7 +325,9 @@ namespace Transportium
                         btnSljedecaIteracija.IsEnabled = false;
                         btnRijesi.IsEnabled = false;
                         IspisiFinalneRelativneTroskovePrijevoza();
-                    }else lblRjesenje.Content = rjesenje;
+                        lblBrojRjesenja.Content = UpraviteljTablice.BrojOptimalnihRjesenja();
+                    }
+                    else lblRjesenje.Content = rjesenje;
                     BoldajZauzeteRelacije();
                 }
                 if (metodaOptimizacije == "MODI metoda")
@@ -380,6 +384,7 @@ namespace Transportium
                     lblRjesenje.Content = rjesenje;
                     IspisiRezultatOptimizacije();
                     IspisiFinalneRelativneTroskovePrijevoza();
+                    lblBrojRjesenja.Content = UpraviteljTablice.BrojOptimalnihRjesenja();
                     cmbMetodaOptimizacije.IsEnabled = false;
                     btnSljedecaIteracija.IsEnabled = false;
                     btnRijesi.IsEnabled = false;

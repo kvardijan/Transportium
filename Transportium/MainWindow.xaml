@@ -64,8 +64,8 @@
                         <Viewbox Grid.Column="1" Grid.Row="0">
                             <Label x:Name="lblRjesenje" Content="Z = xy + yx + yx" Grid.Column="1" Grid.Row="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"/>
                         </Viewbox>
-                        <Label Content="Broj iteracija:" Grid.Column="0" Grid.Row="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="22"/>
-                        <Label x:Name="lblBrojIteracija" Content="7" Grid.Column="1" Grid.Row="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" FontSize="22"/>
+                        <Label Content="Broj rješenja:" Grid.Column="0" Grid.Row="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="22"/>
+                        <Label x:Name="lblBrojRjesenja" Content="" Grid.Column="1" Grid.Row="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" FontSize="22"/>
                         <Label Content="Provjera duala:" Grid.Column="0" Grid.Row="2" VerticalContentAlignment="Top" HorizontalContentAlignment="Center" FontSize="22"/>
                         <ListBox x:Name="lbProvjeraDuala" Grid.Row="2" Grid.Column="1" Margin="10,10,10,10" d:ItemsSource="{d:SampleData ItemCount=5}"/>
                     </Grid>

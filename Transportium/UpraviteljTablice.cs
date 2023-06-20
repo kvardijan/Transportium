@@ -156,5 +156,18 @@ namespace Transportium
             } while (!optimizator.optimalnoRijesenje);
             return IzracunajZ();
         }
+
+        public static int BrojOptimalnihRjesenja()
+        {
+            int brojac = 0;
+            for (int i = 1; i <= brojRedova; i++)
+            {
+                for (int j = 1; j <= brojStupaca; j++)
+                {
+                    if (!tablicaTransporta.TablicaCelija[i][j].Zauzeto && tablicaTransporta.TablicaCelija[i][j].RelativniTrosakPrijevoza == 0) brojac++;
+                }
+            }
+            return (int)Math.Pow(2, brojac);
+        }
     }
 }
