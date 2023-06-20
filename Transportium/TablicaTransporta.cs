@@ -10,6 +10,8 @@ namespace Transportium
     {
         public int[] KapacitetiIzvora { get; set; } = new int[11];
         public int[] PotrebeOdredista { get; set; } = new int[11];
+        public int[] DualneVarijableIshodista { get; set; } = new int[11];
+        public int[] DualneVarijableOdredista { get; set; } = new int[11];
         public int SumaKolicine { get; set; }
         public int Z { get; set; }
         public Celija[][] TablicaCelija { get; set; } = new Celija[11][];

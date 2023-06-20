@@ -10,7 +10,9 @@ namespace Transportium
     {
         public void IzvediIteraciju()
         {
-
+            //izracunaj dualne varijable (pozovi funkciju)
         }
+
+        //TODO: Funkcija za računanje dualnih varijabli
     }
 }

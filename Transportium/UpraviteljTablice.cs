@@ -60,6 +60,8 @@ namespace Transportium
         {
             Array.Clear(tablicaTransporta.PotrebeOdredista, 0, tablicaTransporta.PotrebeOdredista.Length);
             Array.Clear(tablicaTransporta.KapacitetiIzvora, 0, tablicaTransporta.KapacitetiIzvora.Length);
+            Array.Clear(tablicaTransporta.DualneVarijableIshodista, 0, tablicaTransporta.DualneVarijableIshodista.Length);
+            Array.Clear(tablicaTransporta.DualneVarijableOdredista, 0, tablicaTransporta.DualneVarijableOdredista.Length);
             tablicaTransporta.SumaKolicine = 0;
             tablicaTransporta.Z = 0;
             for (int i = 0; i < tablicaTransporta.TablicaCelija.Length; i++)
