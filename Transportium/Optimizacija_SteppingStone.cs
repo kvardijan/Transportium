@@ -21,7 +21,50 @@ namespace Transportium
 
         private void PretovariTeret()
         {
-            throw new NotImplementedException();
+            int maxRelativniTrosak = Int32.MinValue;
+            for (int i = 1; i <= UpraviteljTablice.brojRedova; i++)
+            {
+                for (int j = 1; j <= UpraviteljTablice.brojStupaca; j++)
+                {
+                    Celija trenutnaCelija = UpraviteljTablice.tablicaTransporta.TablicaCelija[i][j];
+
+                    if (trenutnaCelija.RelativniTrosakPrijevoza > 0
+                        && trenutnaCelija.RelativniTrosakPrijevoza >= maxRelativniTrosak)
+                    {
+                        List<Celija> putPretovara = PronadiZatvoreniPut(trenutnaCelija, new List<Celija>(), true);
+                        int kolicinaPretovara = OdrediKolicinuZaPretovariti(putPretovara);
+                        RaspodjeliTeretNaNovuRelaciju(kolicinaPretovara, putPretovara);
+                    }
+                }
+            }
+        }
+
+        private void RaspodjeliTeretNaNovuRelaciju(int kolicinaPretovara, List<Celija> putPretovara)
+        {
+            putPretovara[0].KolicinaTereta = kolicinaPretovara;
+            putPretovara[0].Zauzeto = true;
+            putPretovara[0].RelativniTrosakPrijevoza = 0;
+            bool minus = true;
+
+            for (int i = 1; i < putPretovara.Count; i++)
+            {
+                if(minus) putPretovara[i].KolicinaTereta -= kolicinaPretovara;
+                else putPretovara[i].KolicinaTereta += kolicinaPretovara;
+                if (putPretovara[i].KolicinaTereta == 0) putPretovara[i].Zauzeto = false;
+                minus = !minus;
+            }
+        }
+
+        private int OdrediKolicinuZaPretovariti(List<Celija> putPretovara)
+        {
+            int kolicinaPretovara = Int32.MaxValue;
+            bool minus = false;
+            foreach (var celija in putPretovara)
+            {
+                if (minus && celija.KolicinaTereta < kolicinaPretovara) kolicinaPretovara = celija.KolicinaTereta;
+                minus = !minus;
+            }
+            return kolicinaPretovara;
         }
 
         private bool ProvjeriOptimalnostRijesenja()
