@@ -21,26 +21,28 @@ namespace Transportium
     public partial class MainWindow : Window
     {
         private List<TextBox> txtBoxeviCelija = new List<TextBox>();
+        private int _brojRedova;
+        private int _brojStupaca;
         public MainWindow()
         {
             InitializeComponent();
         }
 
-        private void GenerirajTablicu(int brojRedova, int brojStupaca)
+        private void GenerirajTablicu()
         {
-            DodajOznakeStupaca(brojStupaca);
-            DodajOznakeRedova(brojRedova);
-            DodajTextBoxeve(brojRedova, brojStupaca);
+            DodajOznakeStupaca();
+            DodajOznakeRedova();
+            DodajTextBoxeve();
         }
 
-        private void DodajTextBoxeve(int brojRedova, int brojStupaca)
+        private void DodajTextBoxeve()
         {
             int tabIndex = 1;
-            for (int i = 1; i <= brojRedova + 1; i++)
+            for (int i = 1; i <= _brojRedova + 1; i++)
             {
-                for (int j = 1; j <= brojStupaca + 1; j++)
+                for (int j = 1; j <= _brojStupaca + 1; j++)
                 {
-                    if(i != brojRedova + 1 || j != brojStupaca + 1)
+                    if(i != _brojRedova + 1 || j != _brojStupaca + 1)
                     {
                         Grid celija = new Grid();
                         ContentControl container = new ContentControl();
@@ -63,15 +65,15 @@ namespace Transportium
             }
         }
 
-        private void DodajOznakeRedova(int brojRedova)
+        private void DodajOznakeRedova()
         {
-            for (int i = 1; i <= brojRedova + 1; i++)
+            for (int i = 1; i <= _brojRedova + 1; i++)
             {
                 Grid celija = new Grid();
                 ContentControl container = new ContentControl();
                 Label oznaka = new Label();
 
-                if (i != brojRedova + 1)
+                if (i != _brojRedova + 1)
                 {
                     oznaka.Content = "I" + i.ToString();
                 }
@@ -90,15 +92,15 @@ namespace Transportium
             }
         }
 
-        private void DodajOznakeStupaca(int brojStupaca)
+        private void DodajOznakeStupaca()
         {
 
-            for (int i = 1; i <= brojStupaca + 1; i++)
+            for (int i = 1; i <= _brojStupaca + 1; i++)
             {
                 Grid celija = new Grid();
                 ContentControl container = new ContentControl();
                 Label oznaka = new Label();
-                if (i != brojStupaca + 1)
+                if (i != _brojStupaca + 1)
                 {
                     oznaka.Content = "O" + i.ToString();
                 }
@@ -136,9 +138,9 @@ namespace Transportium
             {
                 OcistiGrid();
                 OcistiVarijable();
-                int nRedova = Int32.Parse(txtBrojRedova.Text);
-                int nStupaca = Int32.Parse(txtBrojStupaca.Text);
-                GenerirajTablicu(nRedova, nStupaca);
+                _brojRedova = Int32.Parse(txtBrojRedova.Text);
+                _brojStupaca = Int32.Parse(txtBrojStupaca.Text);
+                GenerirajTablicu();
                 cmbMetodaPocetnogRasporeda.IsEnabled = true;
                 btnPocetniRaspored.IsEnabled = true;
             }
@@ -178,9 +180,6 @@ namespace Transportium
         int[][] troskoviTransporta = new int[11][];
         private void btnPocetniRaspored_Click(object sender, RoutedEventArgs e)
         {
-            int nRedova = Int32.Parse(txtBrojRedova.Text);
-            int nStupaca = Int32.Parse(txtBrojStupaca.Text);
-
             if (UpraviteljTablice.ucitanaTablica)
             {
                 UpraviteljTablice.OcistiTablicu();
@@ -192,7 +191,7 @@ namespace Transportium
                 PopuniKapaciteteIzvora();
                 PopuniPotrebeOdredista();
                 PopuniTroskoveTransporta();
-                UpraviteljTablice.DefinirajRedoveIStupce(nRedova, nStupaca);
+                UpraviteljTablice.DefinirajRedoveIStupce(_brojRedova, _brojStupaca);
                 UpraviteljTablice.UcitajPodatke(kapacitetiIzvora, potrebeOdredista, troskoviTransporta);
 
                 if (UpraviteljTablice.ProvjeriKapaciteteIPotrebe())
@@ -227,12 +226,9 @@ namespace Transportium
 
         private void MakniIzracunatiTeret()
         {
-            int nRedova = Int32.Parse(txtBrojRedova.Text);
-            int nStupaca = Int32.Parse(txtBrojStupaca.Text);
-
-            for (int i = 1; i <= nRedova; i++)
+            for (int i = 1; i <= _brojRedova; i++)
             {
-                for (int j = 1; j <= nStupaca; j++)
+                for (int j = 1; j <= _brojStupaca; j++)
                 {
                     TextBox celija = txtBoxeviCelija.Find(x => x.Name == "C" + i + j);
                     celija.Text = celija.Text.Split('/')[0];
@@ -242,12 +238,9 @@ namespace Transportium
 
         private void IspisiRezultatRasporedivanja()
         {
-            int nRedova = Int32.Parse(txtBrojRedova.Text);
-            int nStupaca = Int32.Parse(txtBrojStupaca.Text);
-
-            for (int i = 1; i <= nRedova; i++)
+            for (int i = 1; i <= _brojRedova; i++)
             {
-                for (int j = 1; j <= nStupaca; j++)
+                for (int j = 1; j <= _brojStupaca; j++)
                 {
                     TextBox celija = txtBoxeviCelija.Find(x => x.Name == "C" + i + j);
                     celija.Text += "/" + UpraviteljTablice.tablicaTransporta.TablicaCelija[i][j].KolicinaTereta;
@@ -257,36 +250,28 @@ namespace Transportium
 
         private void PopuniPotrebeOdredista()
         {
-            int nRedova = Int32.Parse(txtBrojRedova.Text);
-            int nStupaca = Int32.Parse(txtBrojStupaca.Text);
-
-            for (int i = 1; i <= nStupaca; i++)
+            for (int i = 1; i <= _brojStupaca; i++)
             {
-                TextBox celija = txtBoxeviCelija.Find(x => x.Name == "C" + (nRedova+1).ToString() + i);
+                TextBox celija = txtBoxeviCelija.Find(x => x.Name == "C" + (_brojRedova+1).ToString() + i);
                 potrebeOdredista[i] = Int32.Parse(celija.Text);
             }
         }
 
         private void PopuniKapaciteteIzvora()
         {
-            int nRedova = Int32.Parse(txtBrojRedova.Text);
-            int nStupaca = Int32.Parse(txtBrojStupaca.Text);
-
-            for (int i = 1; i <= nRedova; i++)
+            for (int i = 1; i <= _brojRedova; i++)
             {
-                TextBox celija = txtBoxeviCelija.Find(x => x.Name == "C" + i + (nStupaca+1).ToString());
+                TextBox celija = txtBoxeviCelija.Find(x => x.Name == "C" + i + (_brojStupaca+1).ToString());
                 kapacitetiIzvora[i] = Int32.Parse(celija.Text);
             }
         } 
 
         private void PopuniTroskoveTransporta()
         {
-            int nRedova = Int32.Parse(txtBrojRedova.Text);
-            int nStupaca = Int32.Parse(txtBrojStupaca.Text);
             InicijalizirajArrayTroskovaTransporta();
-            for (int i = 1; i <= nRedova; i++)
+            for (int i = 1; i <= _brojRedova; i++)
             {
-                for (int j = 1; j <= nStupaca; j++)
+                for (int j = 1; j <= _brojStupaca; j++)
                 {
                     TextBox celija = txtBoxeviCelija.Find(x => x.Name == "C" + i + j);
                     troskoviTransporta[i][j] = Int32.Parse(celija.Text);
