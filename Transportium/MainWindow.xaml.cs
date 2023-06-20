@@ -212,6 +212,7 @@ namespace Transportium
                         lblRjesenje.Content = UpraviteljTablice.Rasporedi_Vogel();
                         IspisiRezultatRasporedivanja();
                     }
+                    BoldajZauzeteRelacije();
                     btnSljedecaIteracija.IsEnabled = true;
                     btnRijesi.IsEnabled = true;
                     cmbMetodaOptimizacije.IsEnabled = true;
@@ -325,6 +326,7 @@ namespace Transportium
                         btnRijesi.IsEnabled = false;
                         IspisiFinalneRelativneTroskovePrijevoza();
                     }else lblRjesenje.Content = rjesenje;
+                    BoldajZauzeteRelacije();
                 }
                 if (metodaOptimizacije == "MODI metoda")
                 {
@@ -383,6 +385,7 @@ namespace Transportium
                     cmbMetodaOptimizacije.IsEnabled = false;
                     btnSljedecaIteracija.IsEnabled = false;
                     btnRijesi.IsEnabled = false;
+                    BoldajZauzeteRelacije();
                 }
                 if (metodaOptimizacije == "MODI metoda")
                 {
@@ -392,6 +395,32 @@ namespace Transportium
             else
             {
                 MessageBox.Show("Rjesavanje degeneracije nije jos implementirano.", "Degeneracija!");
+            }
+        }
+
+        private void BoldajZauzeteRelacije()
+        {
+            UnboldajSveRelacije();
+            for (int i = 1; i <= _brojRedova; i++)
+            {
+                for (int j = 1; j <= _brojStupaca; j++)
+                {
+                    Celija celijaTablice = UpraviteljTablice.tablicaTransporta.TablicaCelija[i][j];
+                    TextBox celija = txtBoxeviCelija.Find(x => x.Name == "C" + i + j);
+                    if(celijaTablice.Zauzeto) celija.FontWeight = FontWeights.Bold;
+                }
+            }
+        }
+
+        private void UnboldajSveRelacije()
+        {
+            for (int i = 1; i <= _brojRedova; i++)
+            {
+                for (int j = 1; j <= _brojStupaca; j++)
+                {
+                    TextBox celija = txtBoxeviCelija.Find(x => x.Name == "C" + i + j);
+                    celija.FontWeight = FontWeights.Normal;
+                }
             }
         }
     }
