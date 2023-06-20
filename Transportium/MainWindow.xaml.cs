@@ -212,6 +212,7 @@ namespace Transportium
                         lblRjesenje.Content = UpraviteljTablice.Rasporedi_Vogel();
                         IspisiRezultatRasporedivanja();
                     }
+                    btnSljedecaIteracija.IsEnabled = true;
                 }
                 else
                 {
@@ -303,6 +304,31 @@ namespace Transportium
             }
 
             return ispravno;
+        }
+
+        private void btnSljedecaIteracija_Click(object sender, RoutedEventArgs e)
+        {
+            if (ProvjeriRangSustava())
+            {
+
+            }
+            else
+            {
+                MessageBox.Show("Rjesavanje degeneracije nije jos implementirano.", "Degeneracija!");
+            }
+        }
+
+        private bool ProvjeriRangSustava()
+        {
+            int brojZauzetihCelija = 0;
+            for (int i = 1; i <= _brojRedova; i++)
+            {
+                for (int j = 1; j <= _brojStupaca; j++)
+                {
+                    if(UpraviteljTablice.tablicaTransporta.TablicaCelija[i][j].Zauzeto) brojZauzetihCelija++;
+                }
+            }
+            return brojZauzetihCelija == _brojRedova + _brojStupaca - 1;
         }
     }
 }

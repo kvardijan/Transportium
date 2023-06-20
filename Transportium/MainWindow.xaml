@@ -39,7 +39,7 @@
                 <Button Click="btnPocetniRaspored_Click" x:Name="btnPocetniRaspored" Content="Rasporedi teret" DockPanel.Dock="Top" Height="40" Width="170" FontSize="20" Margin="0,20,0,0" IsEnabled="False"/>
                 <Label Content="Metoda optimizacije" DockPanel.Dock="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Top" FontSize="18" Margin="0,30,0,0"/>
                 <ComboBox x:Name="cmbMetodaOptimizacije" DockPanel.Dock="Top" Height="40" Width="220" VerticalAlignment="Top" Margin="0,20,0,0" IsEnabled="False"/>
-                <Button DockPanel.Dock="Top" x:Name="btnSljedecaIteracija" Content="Sljedeća iteracija" Height="40" Width="170" FontSize="20" Margin="0,20,0,0" IsEnabled="False"/>
+                <Button DockPanel.Dock="Top" Click="btnSljedecaIteracija_Click" x:Name="btnSljedecaIteracija" Content="Sljedeća iteracija" Height="40" Width="170" FontSize="20" Margin="0,20,0,0" IsEnabled="False"/>
                 <Button x:Name="btnRijesi" Content="Riješi problem" Height="40" DockPanel.Dock="Top" VerticalAlignment="Top" Margin="0,20,0,0" Width="170" FontSize="20" IsEnabled="False"/>
                 <Label DockPanel.Dock="Bottom" VerticalAlignment="Bottom" Content="V 1.0" HorizontalContentAlignment="Center"/>
             </DockPanel>
