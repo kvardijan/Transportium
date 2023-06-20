@@ -12,9 +12,31 @@ namespace Transportium
         {
             //izracunaj dualne varijable (pozovi funkciju)
             IzracunajDualneVarijable();
+            //Izracunaj relativne troskove
+            IzracunajRelativneTroskove();
+            if (ProvjeriOptimalnostRijesenja())
+            {
+                optimalnoRijesenje = true;
+                return;
+            }
         }
 
-        //TODO: Funkcija za računanje dualnih varijabli
+        private void IzracunajRelativneTroskove()
+        {
+            for (int i = 1; i <= UpraviteljTablice.brojRedova; i++)
+            {
+                for (int j = 1; j <= UpraviteljTablice.brojStupaca; j++)
+                {
+                    Celija celija = UpraviteljTablice.tablicaTransporta.TablicaCelija[i][j];
+                    if (!celija.Zauzeto)
+                    {
+                        celija.RelativniTrosakPrijevoza = UpraviteljTablice.tablicaTransporta.DualneVarijableIshodista[i] + 
+                            UpraviteljTablice.tablicaTransporta.DualneVarijableOdredista[j] - celija.TrosakPrijevoza;
+                    }
+                }
+            }
+        }
+
         public void IzracunajDualneVarijable()
         {
             int indexTrenutnogReda = 1;
