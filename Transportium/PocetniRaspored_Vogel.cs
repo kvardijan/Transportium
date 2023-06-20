@@ -19,7 +19,6 @@ namespace Transportium
             DodajKolicine();
             DodajSlobodneRedoveStupce();
             sumaKolicine = 0;
-            int kolicina;
             OdabranoPolje odabranoPolje;
 
             do

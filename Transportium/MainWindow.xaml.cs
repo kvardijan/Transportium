@@ -46,10 +46,11 @@ namespace Transportium
                     {
                         Grid celija = new Grid();
                         ContentControl container = new ContentControl();
-                        TextBox textBox = new TextBox();
-
-                        textBox.Name = "C" + i.ToString() + j.ToString();
-                        textBox.Margin = new Thickness(3);
+                        TextBox textBox = new TextBox
+                        {
+                            Name = "C" + i.ToString() + j.ToString(),
+                            Margin = new Thickness(3)
+                        };
                         KeyboardNavigation.SetTabIndex(textBox, tabIndex);
 
                         container.Content = textBox;
@@ -163,10 +164,8 @@ namespace Transportium
         private bool ProvjeriUnosRedovaStupaca()
         {
             bool ispravno = false;
-            int nRedova;
-            int nStupaca;
 
-            if (int.TryParse(txtBrojRedova.Text, out nRedova) && int.TryParse(txtBrojStupaca.Text, out nStupaca)
+            if (int.TryParse(txtBrojRedova.Text, out int nRedova) && int.TryParse(txtBrojStupaca.Text, out int nStupaca)
                 && nRedova > 1 && nRedova <= 10 && nStupaca > 1 && nStupaca <= 10)
             {
                 ispravno = true;
@@ -299,8 +298,7 @@ namespace Transportium
 
             foreach (var celija in txtBoxeviCelija)
             {
-                int trosak;
-                if (!Int32.TryParse(celija.Text, out trosak) || trosak <= 0)
+                if (!Int32.TryParse(celija.Text, out int trosak) || trosak <= 0)
                 {
                     ispravno = false;
                 }

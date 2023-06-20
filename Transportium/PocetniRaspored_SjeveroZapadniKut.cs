@@ -22,7 +22,6 @@ namespace Transportium
 
             do
             {
-                kolicina = 0;
                 if (kolicineIzvora[indexRed] > kolicineOdredista[indexStupac])
                 {
                     kolicina = kolicineOdredista[indexStupac];
