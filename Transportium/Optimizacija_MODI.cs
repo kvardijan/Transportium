@@ -43,9 +43,11 @@ namespace Transportium
 
         public void IzracunajDualneVarijable()
         {
-            int indexTrenutnogReda = 1;
-            int indexTrenutnogStupca = 1;
-            UpraviteljTablice.tablicaTransporta.DualneVarijableIshodista[indexTrenutnogReda] = 0;
+            //int indexTrenutnogReda = 1;
+            //int indexTrenutnogStupca = 1;
+            UpraviteljTablice.tablicaTransporta.DualneVarijableIshodista[1] = 0;
+            List<int> redoviZaProlaz = new List<int> { 1 };
+            List<int> stupciZaProlaz = new List<int>();
             List<int> obradeniRedovi = new List<int> { 1 };
             List<int> obradeniStupci = new List<int>();
             bool obradujemRed = true;
@@ -54,33 +56,43 @@ namespace Transportium
             {
                 if (obradujemRed && obradeniStupci.Count < UpraviteljTablice.brojStupaca)
                 {
-                    for (int i = 1; i <= UpraviteljTablice.brojStupaca; i++)
+                    foreach (var red in redoviZaProlaz)
                     {
-                        if (obradeniStupci.Contains(i)) continue;
-                        Celija trenutnaCelija = UpraviteljTablice.tablicaTransporta.TablicaCelija[indexTrenutnogReda][i];
-                        if (trenutnaCelija.Zauzeto)
+                        for (int i = 1; i <= UpraviteljTablice.brojStupaca; i++)
                         {
-                            UpraviteljTablice.tablicaTransporta.DualneVarijableOdredista[i] =
-                                trenutnaCelija.TrosakPrijevoza - UpraviteljTablice.tablicaTransporta.DualneVarijableIshodista[indexTrenutnogReda];
-                            obradeniStupci.Add(i);
+                            if (obradeniStupci.Contains(i)) continue;
+                            Celija trenutnaCelija = UpraviteljTablice.tablicaTransporta.TablicaCelija[red][i];
+                            if (trenutnaCelija.Zauzeto)
+                            {
+                                UpraviteljTablice.tablicaTransporta.DualneVarijableOdredista[i] =
+                                    trenutnaCelija.TrosakPrijevoza - UpraviteljTablice.tablicaTransporta.DualneVarijableIshodista[red];
+                                obradeniStupci.Add(i);
+                                stupciZaProlaz.Add(i);
+                            }
                         }
                     }
-                    if(indexTrenutnogReda < UpraviteljTablice.brojRedova) indexTrenutnogReda++;
+                    redoviZaProlaz.Clear();
+                    //if(indexTrenutnogReda < UpraviteljTablice.brojRedova) indexTrenutnogReda++;
                 }
                 if(!obradujemRed && obradeniRedovi.Count < UpraviteljTablice.brojRedova)
                 {
-                    for (int i = 1; i <= UpraviteljTablice.brojRedova; i++)
+                    foreach (var stupac in stupciZaProlaz)
                     {
-                        if (obradeniRedovi.Contains(i)) continue;
-                        Celija trenutnaCelija = UpraviteljTablice.tablicaTransporta.TablicaCelija[i][indexTrenutnogStupca];
-                        if (trenutnaCelija.Zauzeto)
+                        for (int i = 1; i <= UpraviteljTablice.brojRedova; i++)
                         {
-                            UpraviteljTablice.tablicaTransporta.DualneVarijableIshodista[i] =
-                                trenutnaCelija.TrosakPrijevoza - UpraviteljTablice.tablicaTransporta.DualneVarijableOdredista[indexTrenutnogStupca];
-                            obradeniRedovi.Add(i);
+                            if (obradeniRedovi.Contains(i)) continue;
+                            Celija trenutnaCelija = UpraviteljTablice.tablicaTransporta.TablicaCelija[i][stupac];
+                            if (trenutnaCelija.Zauzeto)
+                            {
+                                UpraviteljTablice.tablicaTransporta.DualneVarijableIshodista[i] =
+                                    trenutnaCelija.TrosakPrijevoza - UpraviteljTablice.tablicaTransporta.DualneVarijableOdredista[stupac];
+                                obradeniRedovi.Add(i);
+                                redoviZaProlaz.Add(i);
+                            }
                         }
                     }
-                    if (indexTrenutnogStupca < UpraviteljTablice.brojStupaca) indexTrenutnogStupca++;
+                    stupciZaProlaz.Clear();
+                    //if (indexTrenutnogStupca < UpraviteljTablice.brojStupaca) indexTrenutnogStupca++;
                 }
                 obradujemRed = !obradujemRed;
             } while (obradeniRedovi.Count < UpraviteljTablice.brojRedova 
