@@ -8,12 +8,17 @@ namespace Transportium
 {
     public class Optimizacija_SteppingStone
     {
+        public bool optimalnoRijesenje = false;
         public void IzvediIteraciju()
         {
             //izracunaj relativne troskove
             IzracunajRelativneTroskove();
             //provjeri optimalnost => ako je optimalno, zavrsi
-            if (ProvjeriOptimalnostRijesenja()) return;
+            if (ProvjeriOptimalnostRijesenja())
+            {
+                optimalnoRijesenje = true;
+                return;
+            }
             //odredi put za pretovar, odredi kolicinu pretovara pretovari
             PretovariTeret();
             //clear relativne troskove

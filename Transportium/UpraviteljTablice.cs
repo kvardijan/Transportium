@@ -146,5 +146,15 @@ namespace Transportium
             optimizator.IzvediIteraciju();
             return IzracunajZ();
         }
+
+        public static string SteppingStoneOptimiziraj()
+        {
+            Optimizacija_SteppingStone optimizator = new Optimizacija_SteppingStone();
+            do
+            {
+                optimizator.IzvediIteraciju();
+            } while (!optimizator.optimalnoRijesenje);
+            return IzracunajZ();
+        }
     }
 }

@@ -213,6 +213,7 @@ namespace Transportium
                         IspisiRezultatRasporedivanja();
                     }
                     btnSljedecaIteracija.IsEnabled = true;
+                    btnRijesi.IsEnabled = true;
                     cmbMetodaOptimizacije.IsEnabled = true;
                 }
                 else
@@ -314,14 +315,15 @@ namespace Transportium
                 var metodaOptimizacije = (cmbMetodaOptimizacije.SelectedItem as ComboBoxItem).Content.ToString();
                 if (metodaOptimizacije == "Stepping Stone metoda")
                 {
-                    lblRjesenje.Content = UpraviteljTablice.SteppingStoneIducaIteracija();
+                    string rjesenje = UpraviteljTablice.SteppingStoneIducaIteracija();
                     IspisiRezultatOptimizacije();
-                    if ((string)lblRjesenje.Content == UpraviteljTablice.SteppingStoneIducaIteracija())
+                    if ((string)lblRjesenje.Content == rjesenje)
                     {
                         MessageBox.Show("Postignuto je optimalno rjesenje.");
                         cmbMetodaOptimizacije.IsEnabled = false;
                         btnSljedecaIteracija.IsEnabled = false;
-                    }
+                        btnRijesi.IsEnabled = false;
+                    }else lblRjesenje.Content = rjesenje;
                 }
                 if (metodaOptimizacije == "MODI metoda")
                 {
@@ -351,6 +353,31 @@ namespace Transportium
                 }
             }
             return brojZauzetihCelija == _brojRedova + _brojStupaca - 1;
+        }
+
+        private void btnRijesi_Click(object sender, RoutedEventArgs e)
+        {
+            if (ProvjeriRangSustava())
+            {
+                var metodaOptimizacije = (cmbMetodaOptimizacije.SelectedItem as ComboBoxItem).Content.ToString();
+                if (metodaOptimizacije == "Stepping Stone metoda")
+                {
+                    string rjesenje = UpraviteljTablice.SteppingStoneOptimiziraj();
+                    lblRjesenje.Content = rjesenje;
+                    IspisiRezultatOptimizacije();
+                    cmbMetodaOptimizacije.IsEnabled = false;
+                    btnSljedecaIteracija.IsEnabled = false;
+                    btnRijesi.IsEnabled = false;
+                }
+                if (metodaOptimizacije == "MODI metoda")
+                {
+
+                }
+            }
+            else
+            {
+                MessageBox.Show("Rjesavanje degeneracije nije jos implementirano.", "Degeneracija!");
+            }
         }
     }
 }
