@@ -44,7 +44,7 @@
                 </ComboBox>
                 <Button DockPanel.Dock="Top" Click="btnSljedecaIteracija_Click" x:Name="btnSljedecaIteracija" Content="Sljedeća iteracija" Height="40" Width="170" FontSize="20" Margin="0,20,0,0" IsEnabled="False"/>
                 <Button x:Name="btnRijesi" Click="btnRijesi_Click" Content="Riješi problem" Height="40" DockPanel.Dock="Top" VerticalAlignment="Top" Margin="0,20,0,0" Width="170" FontSize="20" IsEnabled="False"/>
-                <Label DockPanel.Dock="Bottom" VerticalAlignment="Bottom" Content="V 1.0" HorizontalContentAlignment="Center"/>
+                <Label DockPanel.Dock="Bottom" VerticalAlignment="Bottom" Content="v1.0" HorizontalContentAlignment="Center"/>
             </DockPanel>
         </Border>
         <DockPanel Grid.Column="1">

@@ -321,19 +321,22 @@ namespace Transportium
                     if ((string)lblRjesenje.Content == rjesenje)
                     {
                         MessageBox.Show("Postignuto je optimalno rjesenje.");
-                        cmbMetodaOptimizacije.IsEnabled = false;
-                        btnSljedecaIteracija.IsEnabled = false;
-                        btnRijesi.IsEnabled = false;
-                        IspisiFinalneRelativneTroskovePrijevoza();
-                        lblBrojRjesenja.Content = UpraviteljTablice.BrojOptimalnihRjesenja();
+                        OnemoguciGumbeIspisiRelativneTroskove();
                     }
                     else lblRjesenje.Content = rjesenje;
-                    BoldajZauzeteRelacije();
                 }
                 if (metodaOptimizacije == "MODI metoda")
                 {
-
+                    string rjesenje = UpraviteljTablice.MODIIducaIteracija();
+                    IspisiRezultatOptimizacije();
+                    if ((string)lblRjesenje.Content == rjesenje)
+                    {
+                        MessageBox.Show("Postignuto je optimalno rjesenje.");
+                        OnemoguciGumbeIspisiRelativneTroskove();
+                    }
+                    else lblRjesenje.Content = rjesenje; 
                 }
+                BoldajZauzeteRelacije();
             }
             else
             {
@@ -383,11 +386,7 @@ namespace Transportium
                     string rjesenje = UpraviteljTablice.SteppingStoneOptimiziraj();
                     lblRjesenje.Content = rjesenje;
                     IspisiRezultatOptimizacije();
-                    IspisiFinalneRelativneTroskovePrijevoza();
-                    lblBrojRjesenja.Content = UpraviteljTablice.BrojOptimalnihRjesenja();
-                    cmbMetodaOptimizacije.IsEnabled = false;
-                    btnSljedecaIteracija.IsEnabled = false;
-                    btnRijesi.IsEnabled = false;
+                    OnemoguciGumbeIspisiRelativneTroskove();
                     BoldajZauzeteRelacije();
                 }
                 if (metodaOptimizacije == "MODI metoda")
@@ -399,6 +398,15 @@ namespace Transportium
             {
                 MessageBox.Show("Rjesavanje degeneracije nije jos implementirano.", "Degeneracija!");
             }
+        }
+
+        private void OnemoguciGumbeIspisiRelativneTroskove()
+        {
+            cmbMetodaOptimizacije.IsEnabled = false;
+            btnSljedecaIteracija.IsEnabled = false;
+            btnRijesi.IsEnabled = false;
+            IspisiFinalneRelativneTroskovePrijevoza();
+            lblBrojRjesenja.Content = UpraviteljTablice.BrojOptimalnihRjesenja();
         }
 
         private void BoldajZauzeteRelacije()
