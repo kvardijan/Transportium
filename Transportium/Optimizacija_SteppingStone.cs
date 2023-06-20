@@ -13,10 +13,32 @@ namespace Transportium
             //izracunaj relativne troskove
             IzracunajRelativneTroskove();
             //provjeri optimalnost => ako je optimalno, zavrsi
+            if (ProvjeriOptimalnostRijesenja()) return;
+            //odredi put za pretovar, odredi kolicinu pretovara pretovari
+            PretovariTeret();
+            //clear relativne troskove
+        }
 
-            //odredi put za pretovar
-            //odredi kolicinu pretovara
-            //pretovari i clear ostale relativne troskove
+        private void PretovariTeret()
+        {
+            throw new NotImplementedException();
+        }
+
+        private bool ProvjeriOptimalnostRijesenja()
+        {
+            bool optimalno = true;
+            for (int i = 1; i <= UpraviteljTablice.brojRedova; i++)
+            {
+                for (int j = 1; j <= UpraviteljTablice.brojStupaca; j++)
+                {
+                    if (UpraviteljTablice.tablicaTransporta.TablicaCelija[i][j].RelativniTrosakPrijevoza > 0)
+                    {
+                        optimalno = false;
+                        break;
+                    }
+                }
+            }
+            return optimalno;
         }
 
         private void IzracunajRelativneTroskove()
@@ -28,9 +50,23 @@ namespace Transportium
                     if (!UpraviteljTablice.tablicaTransporta.TablicaCelija[i][j].Zauzeto)
                     {
                         List<Celija> zatvoreniPut = PronadiZatvoreniPut(UpraviteljTablice.tablicaTransporta.TablicaCelija[i][j], new List<Celija>(), true);
+                        UpraviteljTablice.tablicaTransporta.TablicaCelija[i][j].RelativniTrosakPrijevoza = IzracunajRelativniTrosak(zatvoreniPut);
                     }
                 }
             }
+        }
+
+        private int IzracunajRelativniTrosak(List<Celija> zatvoreniPut)
+        {
+            int relativniTrosak = 0;
+            bool minus = true;
+            foreach (var celija in zatvoreniPut)
+            {
+                if (minus) relativniTrosak -= celija.TrosakPrijevoza;
+                else relativniTrosak += celija.TrosakPrijevoza;
+                minus = !minus;
+            }
+            return relativniTrosak;
         }
 
         private List<Celija> PronadiZatvoreniPut(Celija trenutnaCelija, List<Celija> put, bool red)
