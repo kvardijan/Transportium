@@ -140,6 +140,7 @@ namespace Transportium
         public static string SteppingStoneIducaIteracija()
         {
             Optimizacija_SteppingStone optimizator = new Optimizacija_SteppingStone();
+            optimizator.IzvediIteraciju();
             return IzracunajZ();
         }
     }

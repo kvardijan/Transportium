@@ -314,7 +314,13 @@ namespace Transportium
                 var metodaOptimizacije = (cmbMetodaOptimizacije.SelectedItem as ComboBoxItem).Content.ToString();
                 if (metodaOptimizacije == "Stepping Stone metoda")
                 {
-
+                    lblRjesenje.Content = UpraviteljTablice.SteppingStoneIducaIteracija();
+                    if ((string)lblRjesenje.Content == UpraviteljTablice.SteppingStoneIducaIteracija())
+                    {
+                        MessageBox.Show("Postignuto je optimalno rjesenje.");
+                        cmbMetodaOptimizacije.IsEnabled = false;
+                        btnSljedecaIteracija.IsEnabled = false;
+                    }
                 }
                 if (metodaOptimizacije == "MODI metoda")
                 {
