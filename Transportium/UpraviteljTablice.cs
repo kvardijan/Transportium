@@ -210,6 +210,19 @@ namespace Transportium
             }
         }
 
+        public static bool ProvjeriRangSustava()
+        {
+            int brojZauzetihCelija = 0;
+            for (int i = 1; i <= brojRedova; i++)
+            {
+                for (int j = 1; j <= brojStupaca; j++)
+                {
+                    if (UpraviteljTablice.tablicaTransporta.TablicaCelija[i][j].Zauzeto) brojZauzetihCelija++;
+                }
+            }
+            return brojZauzetihCelija == brojRedova + brojStupaca - 1;
+        }
+
         private static object IzracunajZdual()
         {
             string Zd = "Zd = ";

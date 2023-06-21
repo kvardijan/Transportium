@@ -314,7 +314,7 @@ namespace Transportium
 
         private void btnSljedecaIteracija_Click(object sender, RoutedEventArgs e)
         {
-            if (ProvjeriRangSustava())
+            if (UpraviteljTablice.ProvjeriRangSustava())
             {
                 var metodaOptimizacije = (cmbMetodaOptimizacije.SelectedItem as ComboBoxItem).Content.ToString();
                 if (metodaOptimizacije == "Stepping Stone metoda")
@@ -368,22 +368,9 @@ namespace Transportium
             IspisiRezultatRasporedivanja();
         }
 
-        private bool ProvjeriRangSustava()
-        {
-            int brojZauzetihCelija = 0;
-            for (int i = 1; i <= _brojRedova; i++)
-            {
-                for (int j = 1; j <= _brojStupaca; j++)
-                {
-                    if(UpraviteljTablice.tablicaTransporta.TablicaCelija[i][j].Zauzeto) brojZauzetihCelija++;
-                }
-            }
-            return brojZauzetihCelija == _brojRedova + _brojStupaca - 1;
-        }
-
         private void btnRijesi_Click(object sender, RoutedEventArgs e)
         {
-            if (ProvjeriRangSustava())
+            if (UpraviteljTablice.ProvjeriRangSustava())
             {
                 var metodaOptimizacije = (cmbMetodaOptimizacije.SelectedItem as ComboBoxItem).Content.ToString();
                 if (metodaOptimizacije == "Stepping Stone metoda")
