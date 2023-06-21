@@ -250,10 +250,11 @@ namespace Transportium
             {
                 for (int j = 1; j <= _brojStupaca; j++)
                 {
-                    int teret = UpraviteljTablice.tablicaTransporta.TablicaCelija[i][j].KolicinaTereta;
+                    Celija celijaTablice = UpraviteljTablice.tablicaTransporta.TablicaCelija[i][j];
+                    int teret = celijaTablice.KolicinaTereta;
                     TextBox celija = txtBoxeviCelija.Find(x => x.Name == "C" + i + j);
                     celija.Text += "/";
-                    if (teret != 0) celija.Text += teret.ToString();
+                    if (celijaTablice.Zauzeto) celija.Text += teret.ToString();
                 }
             }
         }
@@ -314,40 +315,32 @@ namespace Transportium
 
         private void btnSljedecaIteracija_Click(object sender, RoutedEventArgs e)
         {
-            if (UpraviteljTablice.ProvjeriRangSustava())
+            var metodaOptimizacije = (cmbMetodaOptimizacije.SelectedItem as ComboBoxItem).Content.ToString();
+            if (metodaOptimizacije == "Stepping Stone metoda")
             {
-                var metodaOptimizacije = (cmbMetodaOptimizacije.SelectedItem as ComboBoxItem).Content.ToString();
-                if (metodaOptimizacije == "Stepping Stone metoda")
+                string rjesenje = UpraviteljTablice.SteppingStoneIducaIteracija();
+                IspisiRezultatOptimizacije();
+                if ((string)lblRjesenje.Content == rjesenje)
                 {
-                    string rjesenje = UpraviteljTablice.SteppingStoneIducaIteracija();
-                    IspisiRezultatOptimizacije();
-                    if ((string)lblRjesenje.Content == rjesenje)
-                    {
-                        MessageBox.Show("Postignuto je optimalno rjesenje.");
-                        OnemoguciGumbeIspisiRelativneTroskove();
-                        UpraviteljTablice.ProvediProvjeruDuala(lbProvjeraDuala);
-                    }
-                    else lblRjesenje.Content = rjesenje;
+                    MessageBox.Show("Postignuto je optimalno rjesenje.");
+                    OnemoguciGumbeIspisiRelativneTroskove();
+                    UpraviteljTablice.ProvediProvjeruDuala(lbProvjeraDuala);
                 }
-                if (metodaOptimizacije == "MODI metoda")
-                {
-                    string rjesenje = UpraviteljTablice.MODIIducaIteracija();
-                    IspisiRezultatOptimizacije();
-                    if ((string)lblRjesenje.Content == rjesenje)
-                    {
-                        MessageBox.Show("Postignuto je optimalno rjesenje.");
-                        OnemoguciGumbeIspisiRelativneTroskove();
-                        UpraviteljTablice.ProvediProvjeruDuala(lbProvjeraDuala);
-                    }
-                    else lblRjesenje.Content = rjesenje; 
-                }
-                BoldajZauzeteRelacije();
+                else lblRjesenje.Content = rjesenje;
             }
-            else
+            if (metodaOptimizacije == "MODI metoda")
             {
-                Degeneracija degeneracija = new Degeneracija();
-                degeneracija.RijesiDegeneraciju();
+                string rjesenje = UpraviteljTablice.MODIIducaIteracija();
+                IspisiRezultatOptimizacije();
+                if ((string)lblRjesenje.Content == rjesenje)
+                {
+                    MessageBox.Show("Postignuto je optimalno rjesenje.");
+                    OnemoguciGumbeIspisiRelativneTroskove();
+                    UpraviteljTablice.ProvediProvjeruDuala(lbProvjeraDuala);
+                }
+                else lblRjesenje.Content = rjesenje; 
             }
+            BoldajZauzeteRelacije();
         }
 
         private void IspisiFinalneRelativneTroskovePrijevoza()
@@ -371,30 +364,22 @@ namespace Transportium
 
         private void btnRijesi_Click(object sender, RoutedEventArgs e)
         {
-            if (UpraviteljTablice.ProvjeriRangSustava())
+            var metodaOptimizacije = (cmbMetodaOptimizacije.SelectedItem as ComboBoxItem).Content.ToString();
+            if (metodaOptimizacije == "Stepping Stone metoda")
             {
-                var metodaOptimizacije = (cmbMetodaOptimizacije.SelectedItem as ComboBoxItem).Content.ToString();
-                if (metodaOptimizacije == "Stepping Stone metoda")
-                {
-                    lblRjesenje.Content = UpraviteljTablice.SteppingStoneOptimiziraj();
-                    IspisiRezultatOptimizacije();
-                    UpraviteljTablice.ProvediProvjeruDuala(lbProvjeraDuala);
-                    OnemoguciGumbeIspisiRelativneTroskove();
-                    BoldajZauzeteRelacije();
-                }
-                if (metodaOptimizacije == "MODI metoda")
-                {
-                    lblRjesenje.Content = UpraviteljTablice.MODIOptimiziraj();
-                    IspisiRezultatOptimizacije();
-                    UpraviteljTablice.ProvediProvjeruDuala(lbProvjeraDuala);
-                    OnemoguciGumbeIspisiRelativneTroskove();
-                    BoldajZauzeteRelacije();
-                }
+                lblRjesenje.Content = UpraviteljTablice.SteppingStoneOptimiziraj();
+                IspisiRezultatOptimizacije();
+                UpraviteljTablice.ProvediProvjeruDuala(lbProvjeraDuala);
+                OnemoguciGumbeIspisiRelativneTroskove();
+                BoldajZauzeteRelacije();
             }
-            else
+            if (metodaOptimizacije == "MODI metoda")
             {
-                Degeneracija degeneracija = new Degeneracija();
-                degeneracija.RijesiDegeneraciju();
+                lblRjesenje.Content = UpraviteljTablice.MODIOptimiziraj();
+                IspisiRezultatOptimizacije();
+                UpraviteljTablice.ProvediProvjeruDuala(lbProvjeraDuala);
+                OnemoguciGumbeIspisiRelativneTroskove();
+                BoldajZauzeteRelacije();
             }
         }
 
