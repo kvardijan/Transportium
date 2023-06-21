@@ -10,9 +10,16 @@ namespace Transportium
     {
         public void RijesiDegeneraciju()
         {
-            //tu mozda provjeru ranga da znamo kolka je razlika da znamo kolko fiktivnih relacija napraviti
+            //TODO: tu mozda provjeru ranga da znamo kolka je razlika da znamo kolko fiktivnih relacija napraviti
             Celija degeneriranaRelacija = ProvjeriZavisnostiRelacija();
-            DohvatiPotencijanuRelacijuRjesenjaDegenaracije(degeneriranaRelacija);
+            Celija relacijaRjesavanjaDegeneracije = DohvatiPotencijanuRelacijuRjesenjaDegenaracije(degeneriranaRelacija);
+            StvoriRelacijuSFiktivnimTeretom(relacijaRjesavanjaDegeneracije);
+        }
+
+        private void StvoriRelacijuSFiktivnimTeretom(Celija relacijaRjesavanjaDegeneracije)
+        {
+            relacijaRjesavanjaDegeneracije.Zauzeto = true;
+            relacijaRjesavanjaDegeneracije.KolicinaTereta = 0;
         }
 
         private Celija ProvjeriZavisnostiRelacija()
@@ -33,9 +40,26 @@ namespace Transportium
             return degeneriranaRelacija;
         }
 
-        private void DohvatiPotencijanuRelacijuRjesenjaDegenaracije(Celija degeneriranaRelacija)
+        //vraca nezauzetu celiju koja je u istom redu ili stupcu kao degenerirana relacija i ima najmanju trosak prijevoza
+        private Celija DohvatiPotencijanuRelacijuRjesenjaDegenaracije(Celija degeneriranaRelacija)
         {
-            throw new NotImplementedException();
+            Celija odabranaRelacija = new Celija
+            {
+                TrosakPrijevoza = int.MaxValue
+            };
+
+            for (int i = 1; i <= UpraviteljTablice.brojStupaca; i++)
+            {
+                Celija celija = UpraviteljTablice.tablicaTransporta.TablicaCelija[degeneriranaRelacija.Red][i];
+                if (!celija.Zauzeto && celija.TrosakPrijevoza < odabranaRelacija.TrosakPrijevoza) odabranaRelacija = celija;
+            }
+            for (int i = 1; i <= UpraviteljTablice.brojRedova; i++)
+            {
+                Celija celija = UpraviteljTablice.tablicaTransporta.TablicaCelija[i][degeneriranaRelacija.Stupac];
+                if (!celija.Zauzeto && celija.TrosakPrijevoza < odabranaRelacija.TrosakPrijevoza) odabranaRelacija = celija;
+            }
+
+            return odabranaRelacija;
         }
 
         private int IzbrojiZauzeteCelijeStupca(int indexStupca)
