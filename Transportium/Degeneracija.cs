@@ -25,8 +25,7 @@ namespace Transportium
                     Celija celija = UpraviteljTablice.tablicaTransporta.TablicaCelija[i][j];
                     if (celija.Zauzeto)
                     {
-                        int brojPovezanihRelacija = IzbrojiZauzeteCelijeReda(i);
-                        brojPovezanihRelacija = IzbrojiZauzeteCelijeStupca(j);
+                        int brojPovezanihRelacija = Math.Max(IzbrojiZauzeteCelijeReda(i), IzbrojiZauzeteCelijeStupca(j));
                         if (brojPovezanihRelacija == 1) degeneriranaRelacija = celija;
                     }
                 }
@@ -41,12 +40,22 @@ namespace Transportium
 
         private int IzbrojiZauzeteCelijeStupca(int indexStupca)
         {
-            throw new NotImplementedException();
+            int brojZauzetihCelija = 0;
+            for (int i = 1; i <= UpraviteljTablice.brojRedova; i++)
+            {
+                if (UpraviteljTablice.tablicaTransporta.TablicaCelija[i][indexStupca].Zauzeto) brojZauzetihCelija++;
+            }
+            return brojZauzetihCelija;
         }
 
         private int IzbrojiZauzeteCelijeReda(int indexReda)
         {
-            throw new NotImplementedException();
+            int brojZauzetihCelija = 0;
+            for (int i = 1; i <= UpraviteljTablice.brojStupaca; i++)
+            {
+                if (UpraviteljTablice.tablicaTransporta.TablicaCelija[indexReda][i].Zauzeto) brojZauzetihCelija++;
+            }
+            return brojZauzetihCelija;
         }
     }
 }
