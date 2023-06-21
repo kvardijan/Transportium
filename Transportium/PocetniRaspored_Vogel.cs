@@ -154,7 +154,7 @@ namespace Transportium
                 }
 
                 brojacS++;
-                if (brojacS <= slobodniRedovi.Count) i = slobodniRedovi[brojacS - 1];
+                if (brojacS <= slobodniStupci.Count) i = slobodniStupci[brojacS - 1];
             }
             return odabranoPolje;
         }
