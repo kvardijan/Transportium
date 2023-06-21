@@ -10,10 +10,26 @@ namespace Transportium
     {
         public void RijesiDegeneraciju()
         {
-            //TODO: tu mozda provjeru ranga da znamo kolka je razlika da znamo kolko fiktivnih relacija napraviti
-            Celija degeneriranaRelacija = ProvjeriZavisnostiRelacija();
-            Celija relacijaRjesavanjaDegeneracije = DohvatiPotencijanuRelacijuRjesenjaDegenaracije(degeneriranaRelacija);
-            StvoriRelacijuSFiktivnimTeretom(relacijaRjesavanjaDegeneracije);
+            int potrebnoFiktivnihRelacija = OdrediBrojPotrebnihFiktivnihRelacija();
+            for (int i = 0; i < potrebnoFiktivnihRelacija; i++)
+            {
+                Celija degeneriranaRelacija = ProvjeriZavisnostiRelacija();
+                Celija relacijaRjesavanjaDegeneracije = DohvatiPotencijanuRelacijuRjesenjaDegenaracije(degeneriranaRelacija);
+                StvoriRelacijuSFiktivnimTeretom(relacijaRjesavanjaDegeneracije);
+            }
+        }
+
+        private int OdrediBrojPotrebnihFiktivnihRelacija()
+        {
+            int brojZauzetihCelija = 0;
+            for (int i = 1; i <= UpraviteljTablice.brojRedova; i++)
+            {
+                for (int j = 1; j <= UpraviteljTablice.brojStupaca; j++)
+                {
+                    if (UpraviteljTablice.tablicaTransporta.TablicaCelija[i][j].Zauzeto) brojZauzetihCelija++;
+                }
+            }
+            return UpraviteljTablice.brojRedova + UpraviteljTablice.brojStupaca - 1 - brojZauzetihCelija;
         }
 
         private void StvoriRelacijuSFiktivnimTeretom(Celija relacijaRjesavanjaDegeneracije)
