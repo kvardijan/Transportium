@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace Transportium
 {
@@ -187,6 +188,53 @@ namespace Transportium
                 }
             }
             return (int)Math.Pow(2, brojac);
+        }
+
+        public static void ProvediProvjeruDuala(ListBox lbProvjeraDuala)
+        {
+            Optimizacija_MODI optimizator = new Optimizacija_MODI();
+            optimizator.IzracunajDualneVarijable();
+            lbProvjeraDuala.Items.Add(IzracunajZdual());
+            IspisiDualnaOgranicenja(lbProvjeraDuala);
+        }
+
+        private static void IspisiDualnaOgranicenja(ListBox lbProvjeraDuala)
+        {
+            for (int i = 1; i <= brojRedova; i++)
+            {
+                for (int j = 1; j <= brojStupaca; j++)
+                {
+                    lbProvjeraDuala.Items.Add(tablicaTransporta.DualneVarijableIshodista[i] + " + " 
+                        + tablicaTransporta.DualneVarijableOdredista[j] + " <= " + tablicaTransporta.TablicaCelija[i][j].TrosakPrijevoza);
+                }
+            }
+        }
+
+        private static object IzracunajZdual()
+        {
+            string Zd = "Zd = ";
+            int ZdVrijenost = 0;
+            bool prvi = true;
+            for (int i = 1; i <= brojRedova; i++)
+            {
+                if (!prvi)
+                {
+                    Zd += "+ " + tablicaTransporta.KapacitetiIzvora[i] + "*" + tablicaTransporta.DualneVarijableIshodista[i] + " ";
+                }
+                else
+                {
+                    Zd += tablicaTransporta.KapacitetiIzvora[i] + "*" + tablicaTransporta.DualneVarijableIshodista[i] + " ";
+                    prvi = false;
+                }
+                ZdVrijenost += tablicaTransporta.KapacitetiIzvora[i] * tablicaTransporta.DualneVarijableIshodista[i];
+            }
+            for (int i = 1; i <= brojStupaca; i++)
+            {
+                Zd += "+ " + tablicaTransporta.PotrebeOdredista[i] + "*" + tablicaTransporta.DualneVarijableOdredista[i] + " ";
+                ZdVrijenost += tablicaTransporta.PotrebeOdredista[i] * tablicaTransporta.DualneVarijableOdredista[i];
+            }
+            Zd += "= " + ZdVrijenost;
+            return Zd;
         }
     }
 }

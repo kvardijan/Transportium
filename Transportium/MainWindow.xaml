@@ -62,7 +62,7 @@
                         </Grid.RowDefinitions>
                         <Label Content="Rješenje:" Grid.Column="0" Grid.Row="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="22"/>
                         <Viewbox Grid.Column="1" Grid.Row="0">
-                            <Label x:Name="lblRjesenje" Content="Z = xy + yx + yx" Grid.Column="1" Grid.Row="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"/>
+                            <Label x:Name="lblRjesenje" Content="Z =" Grid.Column="1" Grid.Row="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"/>
                         </Viewbox>
                         <Label Content="Broj rješenja:" Grid.Column="0" Grid.Row="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="22"/>
                         <Label x:Name="lblBrojRjesenja" Content="" Grid.Column="1" Grid.Row="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" FontSize="22"/>

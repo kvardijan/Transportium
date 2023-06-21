@@ -145,6 +145,8 @@ namespace Transportium
                 cmbMetodaPocetnogRasporeda.IsEnabled = true;
                 btnPocetniRaspored.IsEnabled = true;
                 lblBrojRjesenja.Content = "";
+                lbProvjeraDuala.Items.Clear();
+                lblRjesenje.Content = "Z =";
             }
             else
             {
@@ -185,6 +187,7 @@ namespace Transportium
                 UpraviteljTablice.OcistiTablicu();
                 MakniIzracunatiTeret();
                 lblBrojRjesenja.Content = "";
+                lbProvjeraDuala.Items.Clear();
             }
 
             if (ProvjeriVrijednostiTabliceTransporta())
@@ -322,6 +325,7 @@ namespace Transportium
                     {
                         MessageBox.Show("Postignuto je optimalno rjesenje.");
                         OnemoguciGumbeIspisiRelativneTroskove();
+                        UpraviteljTablice.ProvediProvjeruDuala(lbProvjeraDuala);
                     }
                     else lblRjesenje.Content = rjesenje;
                 }
@@ -333,6 +337,7 @@ namespace Transportium
                     {
                         MessageBox.Show("Postignuto je optimalno rjesenje.");
                         OnemoguciGumbeIspisiRelativneTroskove();
+                        UpraviteljTablice.ProvediProvjeruDuala(lbProvjeraDuala);
                     }
                     else lblRjesenje.Content = rjesenje; 
                 }
@@ -385,6 +390,7 @@ namespace Transportium
                 {
                     lblRjesenje.Content = UpraviteljTablice.SteppingStoneOptimiziraj();
                     IspisiRezultatOptimizacije();
+                    UpraviteljTablice.ProvediProvjeruDuala(lbProvjeraDuala);
                     OnemoguciGumbeIspisiRelativneTroskove();
                     BoldajZauzeteRelacije();
                 }
@@ -392,6 +398,7 @@ namespace Transportium
                 {
                     lblRjesenje.Content = UpraviteljTablice.MODIOptimiziraj();
                     IspisiRezultatOptimizacije();
+                    UpraviteljTablice.ProvediProvjeruDuala(lbProvjeraDuala);
                     OnemoguciGumbeIspisiRelativneTroskove();
                     BoldajZauzeteRelacije();
                 }
