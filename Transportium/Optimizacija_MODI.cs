@@ -10,6 +10,11 @@ namespace Transportium
     {
         public void IzvediIteraciju()
         {
+            if (!UpraviteljTablice.ProvjeriRangSustava())
+            {
+                Degeneracija degeneracija = new Degeneracija();
+                degeneracija.RijesiDegeneraciju();
+            }
             //izracunaj dualne varijable (pozovi funkciju)
             IzracunajDualneVarijable();
             //Izracunaj relativne troskove

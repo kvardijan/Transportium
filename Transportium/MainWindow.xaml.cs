@@ -345,7 +345,8 @@ namespace Transportium
             }
             else
             {
-                MessageBox.Show("Rjesavanje degeneracije nije jos implementirano.", "Degeneracija!");
+                Degeneracija degeneracija = new Degeneracija();
+                degeneracija.RijesiDegeneraciju();
             }
         }
 
@@ -392,7 +393,8 @@ namespace Transportium
             }
             else
             {
-                MessageBox.Show("Rjesavanje degeneracije nije jos implementirano.", "Degeneracija!");
+                Degeneracija degeneracija = new Degeneracija();
+                degeneracija.RijesiDegeneraciju();
             }
         }
 

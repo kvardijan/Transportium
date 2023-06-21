@@ -10,6 +10,11 @@ namespace Transportium
     {
         public void IzvediIteraciju()
         {
+            if (!UpraviteljTablice.ProvjeriRangSustava())
+            {
+                Degeneracija degeneracija = new Degeneracija();
+                degeneracija.RijesiDegeneraciju();
+            }
             //izracunaj relativne troskove
             IzracunajRelativneTroskove();
             //provjeri optimalnost => ako je optimalno, zavrsi
