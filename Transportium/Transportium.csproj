@@ -64,6 +64,7 @@
     <Compile Include="PocetniRaspored_SjeveroZapadniKut.cs" />
     <Compile Include="PocetniRaspored_Vogel.cs" />
     <Compile Include="TablicaTransporta.cs" />
+    <Compile Include="UpraviteljPostupka.cs" />
     <Compile Include="UpraviteljTablice.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

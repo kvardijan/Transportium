@@ -26,6 +26,7 @@ namespace Transportium
         public MainWindow()
         {
             InitializeComponent();
+            UpraviteljPostupka.Postupak = lbPostupak;
         }
 
         private void GenerirajTablicu()
