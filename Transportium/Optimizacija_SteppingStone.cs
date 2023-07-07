@@ -12,21 +12,20 @@ namespace Transportium
         {
             if (!UpraviteljTablice.ProvjeriRangSustava())
             {
+                UpraviteljPostupka.DodajPostupak("Rijesenje je degenerirano. Potrebno je riješiti degeneraciju.");
                 Degeneracija degeneracija = new Degeneracija();
                 degeneracija.RijesiDegeneraciju();
             }
-            //izracunaj relativne troskove
             IzracunajRelativneTroskove();
-            //provjeri optimalnost => ako je optimalno, zavrsi
             if (ProvjeriOptimalnostRijesenja())
             {
                 optimalnoRijesenje = true;
+                UpraviteljPostupka.DodajPostupak("Rijesenje je optimalno!");
                 return;
             }
-            //odredi put za pretovar, odredi kolicinu pretovara pretovari
             PretovariTeret();
-            //clear relativne troskove
             OcistiRelativneTroskove();
+            UpraviteljPostupka.DodajPostupak("Kraj iteracije. --------");
         }
 
         private void IzracunajRelativneTroskove()
@@ -38,7 +37,10 @@ namespace Transportium
                     if (!UpraviteljTablice.tablicaTransporta.TablicaCelija[i][j].Zauzeto)
                     {
                         List<Celija> zatvoreniPut = PronadiZatvoreniPut(UpraviteljTablice.tablicaTransporta.TablicaCelija[i][j], new List<Celija>(), true);
-                        UpraviteljTablice.tablicaTransporta.TablicaCelija[i][j].RelativniTrosakPrijevoza = IzracunajRelativniTrosak(zatvoreniPut);
+                        IspisiZatvoreniPut(zatvoreniPut);
+                        int relTrosak = IzracunajRelativniTrosak(zatvoreniPut);
+                        UpraviteljTablice.tablicaTransporta.TablicaCelija[i][j].RelativniTrosakPrijevoza = relTrosak;
+                        UpraviteljPostupka.DodajPostupak("Relativni trosak prijevoza za (" + i + ", " + j + "): " + relTrosak);
                     }
                 }
             }

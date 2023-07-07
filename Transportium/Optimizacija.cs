@@ -58,7 +58,6 @@ namespace Transportium
                     {
                         List<Celija> putPretovara = PronadiZatvoreniPut(trenutnaCelija, new List<Celija>(), true);
                         int kolicinaPretovara = OdrediKolicinuZaPretovariti(putPretovara);
-
                         if (trenutnaCelija.RelativniTrosakPrijevoza > stozerniElement.relativniTrosak
                             || (trenutnaCelija.RelativniTrosakPrijevoza == stozerniElement.relativniTrosak
                             && kolicinaPretovara > stozerniElement.teretPretovara))
@@ -70,6 +69,9 @@ namespace Transportium
                     }
                 }
             }
+            UpraviteljPostupka.DodajPostupak("Pretovar tereta:");
+            IspisiZatvoreniPut(stozerniElement.putPretovara);
+            UpraviteljPostupka.DodajPostupak("Količina pretovara je " + stozerniElement.teretPretovara);
             RaspodjeliTeretNaNovuRelaciju(stozerniElement.teretPretovara, stozerniElement.putPretovara);
         }
 
@@ -118,6 +120,17 @@ namespace Transportium
             }
             put.Remove(trenutnaCelija); //ako nije pronadjen put, makni trenutnu celiju iz puta
             return null; //ako nije pronadjen put, vrati null
+        }
+
+        protected void IspisiZatvoreniPut(List<Celija> zatvoreniPut)
+        {
+            UpraviteljPostupka.DodajPostupak("Zatvoreni put za (" + zatvoreniPut[0].Red + ", " + zatvoreniPut[0].Stupac + "): ");
+            string put = "";
+            foreach (var celija in zatvoreniPut)
+            {
+                put += "(" + celija.Red + ", " + celija.Stupac + ") ";
+            }
+            UpraviteljPostupka.DodajPostupak(put);
         }
 
         private int OdrediKolicinuZaPretovariti(List<Celija> putPretovara)
