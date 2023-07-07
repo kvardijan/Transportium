@@ -68,6 +68,7 @@ namespace Transportium
             kolicineIzvora[indexReda] -= kolicina;
             kolicineOdredista[indexStupca] -= kolicina;
             sumaKolicine += kolicina;
+            UpraviteljPostupka.DodajPostupak("Odabrana je relacija (" + indexReda + ", " + indexStupca + ") i stavljena je količina od " + kolicina);
         }
 
         private int IzracunajKolicinuTeretaZaStaviti(int indexReda, int indexStupca)
@@ -134,6 +135,7 @@ namespace Transportium
 
                 troskovi.Sort();
                 int rIndex = troskovi[1] - troskovi[0];
+                UpraviteljPostupka.DodajPostupak("Indeks za stupac " + brojacS + " je: " + rIndex);
                 if (rIndex > odabranoPolje.vogelIndex)
                 {
                     odabranoPolje = AzurirajOdabranoPolje(odabranoPolje, rIndex, IzracunajKolicinuTeretaZaStaviti(indexOdabranogReda, i),
@@ -203,6 +205,7 @@ namespace Transportium
 
                 troskovi.Sort();
                 int rIndex = troskovi[1] - troskovi[0];
+                UpraviteljPostupka.DodajPostupak("Indeks za red " + brojacR + " je: " + rIndex);
                 if (rIndex > odabranoPolje.vogelIndex)
                 {
                     odabranoPolje = AzurirajOdabranoPolje(odabranoPolje, rIndex, IzracunajKolicinuTeretaZaStaviti(i, indexOdabranogStupca),
