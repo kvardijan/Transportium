@@ -138,6 +138,7 @@ namespace Transportium
         {
             if (ProvjeriUnosRedovaStupaca())
             {
+                UpraviteljPostupka.OcistiPostupak();
                 OcistiGrid();
                 OcistiVarijable();
                 _brojRedova = Int32.Parse(txtBrojRedova.Text);
@@ -204,16 +205,19 @@ namespace Transportium
                     var metodaPocetnogRasporeda = (cmbMetodaPocetnogRasporeda.SelectedItem as ComboBoxItem).Content.ToString();
                     if (metodaPocetnogRasporeda == "Sjeverozapadni kut")
                     {
+                        UpraviteljPostupka.DodajPostupak("===== Sjeverozapadni kut =====");
                         lblRjesenje.Content = UpraviteljTablice.Rasporedi_SZKut();
                         IspisiRezultatRasporedivanja();
                     }
                     if (metodaPocetnogRasporeda == "Minimalni troškovi")
                     {
+                        UpraviteljPostupka.DodajPostupak("===== Minimalni troškovi =====");
                         lblRjesenje.Content = UpraviteljTablice.Rasporedi_MinCost();
                         IspisiRezultatRasporedivanja();
                     }
                     if (metodaPocetnogRasporeda == "Vogel aproksimacija")
                     {
+                        UpraviteljPostupka.DodajPostupak("===== Vogel aproksimacija =====");
                         lblRjesenje.Content = UpraviteljTablice.Rasporedi_Vogel();
                         IspisiRezultatRasporedivanja();
                     }
@@ -368,6 +372,7 @@ namespace Transportium
             var metodaOptimizacije = (cmbMetodaOptimizacije.SelectedItem as ComboBoxItem).Content.ToString();
             if (metodaOptimizacije == "Stepping Stone metoda")
             {
+                UpraviteljPostupka.DodajPostupak("===== Stepping Stone metoda =====");
                 lblRjesenje.Content = UpraviteljTablice.SteppingStoneOptimiziraj();
                 IspisiRezultatOptimizacije();
                 UpraviteljTablice.ProvediProvjeruDuala(lbProvjeraDuala);
@@ -376,6 +381,7 @@ namespace Transportium
             }
             if (metodaOptimizacije == "MODI metoda")
             {
+                UpraviteljPostupka.DodajPostupak("===== MODI metoda =====");
                 lblRjesenje.Content = UpraviteljTablice.MODIOptimiziraj();
                 IspisiRezultatOptimizacije();
                 UpraviteljTablice.ProvediProvjeruDuala(lbProvjeraDuala);

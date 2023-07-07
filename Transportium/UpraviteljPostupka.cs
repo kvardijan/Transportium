@@ -16,7 +16,7 @@ namespace Transportium
             Postupak.Items.Add(postupak);
         }
 
-        public static void ObrisiPostupak()
+        public static void OcistiPostupak()
         {
             Postupak.Items.Clear();
         }
