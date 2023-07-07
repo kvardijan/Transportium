@@ -16,7 +16,6 @@ namespace Transportium
 
         public void RjesiRasporedivanje()
         {
-            //ResetirajKolicine();
             DodajKolicine();
             DodajSlobodneRedoveStupce();
             sumaKolicine = 0;
@@ -29,6 +28,7 @@ namespace Transportium
                 int red = poljeNajmanjegTroska.indexReda;
                 int stupac = poljeNajmanjegTroska.indexStupca;
                 kolicina = poljeNajmanjegTroska.maxTeret;
+                UpraviteljPostupka.DodajPostupak("Odabrana relacija (" + red + ", " + stupac + ") i stavljena količina od " + kolicina);
 
                 UpraviteljTablice.tablicaTransporta.TablicaCelija[red][stupac].KolicinaTereta = kolicina;
                 UpraviteljTablice.tablicaTransporta.TablicaCelija[red][stupac].Zauzeto = true;
@@ -122,12 +122,6 @@ namespace Transportium
                 kolicineOdredista[i] = UpraviteljTablice.tablicaTransporta.PotrebeOdredista[i];
             }
         }
-
-/*        private void ResetirajKolicine()
-        {
-            Array.Clear(kolicineIzvora, 0, kolicineIzvora.Length);
-            Array.Clear(kolicineOdredista, 0, kolicineOdredista.Length);
-        }*/
 
         private struct PoljeNajmanjegTroska
         {
