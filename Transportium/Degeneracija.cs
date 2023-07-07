@@ -11,12 +11,16 @@ namespace Transportium
         public void RijesiDegeneraciju()
         {
             int potrebnoFiktivnihRelacija = OdrediBrojPotrebnihFiktivnihRelacija();
+            UpraviteljPostupka.DodajPostupak("Potreban broj fiktivnih relacija: " + potrebnoFiktivnihRelacija);
             for (int i = 0; i < potrebnoFiktivnihRelacija; i++)
             {
                 Celija degeneriranaRelacija = ProvjeriZavisnostiRelacija();
+                UpraviteljPostupka.DodajPostupak("Relacija (" + degeneriranaRelacija.Red + ", " + degeneriranaRelacija.Stupac + ") nije povezana s ostalima");
                 Celija relacijaRjesavanjaDegeneracije = DohvatiPotencijanuRelacijuRjesenjaDegenaracije(degeneriranaRelacija);
+                UpraviteljPostupka.DodajPostupak("Fiktivan teret dodan na relaciju (" + relacijaRjesavanjaDegeneracije.Red + ", " + relacijaRjesavanjaDegeneracije.Stupac + ")");
                 StvoriRelacijuSFiktivnimTeretom(relacijaRjesavanjaDegeneracije);
             }
+            UpraviteljPostupka.DodajPostupak("Degeneracija riješena");
         }
 
         private int OdrediBrojPotrebnihFiktivnihRelacija()
