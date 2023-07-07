@@ -13,7 +13,6 @@ namespace Transportium
         int sumaKolicine;
         public void RjesiRasporedivanje()
         {
-            //ResetirajKolicine();
             DodajKolicine();
             sumaKolicine = 0;
             int indexRed = 1;
@@ -32,6 +31,8 @@ namespace Transportium
                 }
                 UpraviteljTablice.tablicaTransporta.TablicaCelija[indexRed][indexStupac].KolicinaTereta = kolicina;
                 UpraviteljTablice.tablicaTransporta.TablicaCelija[indexRed][indexStupac].Zauzeto = true;
+
+                UpraviteljPostupka.Postupak.Items.Add("Količina " + kolicina + " stavljena na relaciju (" + indexRed + ", " + indexStupac + ")");
 
                 sumaKolicine += kolicina;
                 kolicineIzvora[indexRed] -= kolicina;
@@ -53,11 +54,5 @@ namespace Transportium
                 kolicineOdredista[i] = UpraviteljTablice.tablicaTransporta.PotrebeOdredista[i];
             }
         }
-
-/*        private void ResetirajKolicine()
-        {
-            Array.Clear(kolicineIzvora, 0, kolicineIzvora.Length);
-            Array.Clear(kolicineOdredista, 0, kolicineOdredista.Length);
-        }*/
     }
 }

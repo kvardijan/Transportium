@@ -323,6 +323,7 @@ namespace Transportium
             var metodaOptimizacije = (cmbMetodaOptimizacije.SelectedItem as ComboBoxItem).Content.ToString();
             if (metodaOptimizacije == "Stepping Stone metoda")
             {
+                UpraviteljPostupka.DodajPostupak("===== Iteracija Stepping Stone metode =====");
                 string rjesenje = UpraviteljTablice.SteppingStoneIducaIteracija();
                 IspisiRezultatOptimizacije();
                 if ((string)lblRjesenje.Content == rjesenje)
@@ -335,6 +336,7 @@ namespace Transportium
             }
             if (metodaOptimizacije == "MODI metoda")
             {
+                UpraviteljPostupka.DodajPostupak("===== Iteracija MODI metode =====");
                 string rjesenje = UpraviteljTablice.MODIIducaIteracija();
                 IspisiRezultatOptimizacije();
                 if ((string)lblRjesenje.Content == rjesenje)
