@@ -57,7 +57,28 @@ namespace Transportium
                     }
                 }
             }
+            if (degeneriranaRelacija == null) degeneriranaRelacija = OdaberiPrvuSlobodnuRelaciju();
             return degeneriranaRelacija;
+        }
+
+        private Celija OdaberiPrvuSlobodnuRelaciju()
+        {
+            bool pronadenaCelija = false;
+            Celija prvaSlobodnaCelija = null;
+            for (int i = 1; i <= UpraviteljTablice.brojRedova; i++)
+            {
+                for (int j = 1; j <= UpraviteljTablice.brojStupaca; j++)
+                {
+                    if (!UpraviteljTablice.tablicaTransporta.TablicaCelija[i][j].Zauzeto)
+                    {
+                        prvaSlobodnaCelija = UpraviteljTablice.tablicaTransporta.TablicaCelija[i][j];
+                        pronadenaCelija = true;
+                    }
+                    if (pronadenaCelija) break;
+                }
+                if (pronadenaCelija) break;
+            }
+            return prvaSlobodnaCelija;
         }
 
         //vraca nezauzetu celiju koja je u istom redu ili stupcu kao degenerirana relacija i ima najmanju trosak prijevoza
