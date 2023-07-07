@@ -12,22 +12,36 @@ namespace Transportium
         {
             if (!UpraviteljTablice.ProvjeriRangSustava())
             {
+                UpraviteljPostupka.DodajPostupak("Rijesenje je degenerirano. Potrebno je riješiti degeneraciju.");
                 Degeneracija degeneracija = new Degeneracija();
                 degeneracija.RijesiDegeneraciju();
             }
-            //izracunaj dualne varijable (pozovi funkciju)
             IzracunajDualneVarijable();
-            //Izracunaj relativne troskove
+            IspisiDualneVarijable();
             IzracunajRelativneTroskove();
             if (ProvjeriOptimalnostRijesenja())
             {
                 optimalnoRijesenje = true;
+                UpraviteljPostupka.DodajPostupak("Rijesenje je optimalno!");
                 return;
             }
-            //odredi put za pretovar, odredi kolicinu pretovara pretovari
             PretovariTeret();
-            //clear relativne troskove
             OcistiRelativneTroskove();
+            UpraviteljPostupka.DodajPostupak("Kraj iteracije. --------");
+        }
+
+        private void IspisiDualneVarijable()
+        {
+            UpraviteljPostupka.DodajPostupak("Dualne varijable izvorišta: ");
+            for (int i = 1; i <= UpraviteljTablice.brojRedova; i++)
+            {
+                UpraviteljPostupka.DodajPostupak("u" + i + " = " + UpraviteljTablice.tablicaTransporta.DualneVarijableIshodista[i]);
+            }
+            UpraviteljPostupka.DodajPostupak("Dualne varijable odredišta: ");
+            for (int i = 1; i <= UpraviteljTablice.brojStupaca; i++)
+            {
+                UpraviteljPostupka.DodajPostupak("v" + i + " = " + UpraviteljTablice.tablicaTransporta.DualneVarijableOdredista[i]);
+            }
         }
 
         private void IzracunajRelativneTroskove()
@@ -41,6 +55,9 @@ namespace Transportium
                     {
                         celija.RelativniTrosakPrijevoza = UpraviteljTablice.tablicaTransporta.DualneVarijableIshodista[i] + 
                             UpraviteljTablice.tablicaTransporta.DualneVarijableOdredista[j] - celija.TrosakPrijevoza;
+                        UpraviteljPostupka.DodajPostupak("C" + i + j + "* = (" + UpraviteljTablice.tablicaTransporta.DualneVarijableIshodista[i] + 
+                            " + " + UpraviteljTablice.tablicaTransporta.DualneVarijableOdredista[j] + ") - " + celija.TrosakPrijevoza + 
+                            " = " + celija.RelativniTrosakPrijevoza);
                     }
                 }
             }
@@ -48,8 +65,6 @@ namespace Transportium
 
         public void IzracunajDualneVarijable()
         {
-            //int indexTrenutnogReda = 1;
-            //int indexTrenutnogStupca = 1;
             UpraviteljTablice.tablicaTransporta.DualneVarijableIshodista[1] = 0;
             List<int> redoviZaProlaz = new List<int> { 1 };
             List<int> stupciZaProlaz = new List<int>();
@@ -77,7 +92,6 @@ namespace Transportium
                         }
                     }
                     redoviZaProlaz.Clear();
-                    //if(indexTrenutnogReda < UpraviteljTablice.brojRedova) indexTrenutnogReda++;
                 }
                 if(!obradujemRed && obradeniRedovi.Count < UpraviteljTablice.brojRedova)
                 {
@@ -97,7 +111,6 @@ namespace Transportium
                         }
                     }
                     stupciZaProlaz.Clear();
-                    //if (indexTrenutnogStupca < UpraviteljTablice.brojStupaca) indexTrenutnogStupca++;
                 }
                 obradujemRed = !obradujemRed;
             } while (obradeniRedovi.Count < UpraviteljTablice.brojRedova 
