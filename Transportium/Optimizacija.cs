@@ -77,49 +77,49 @@ namespace Transportium
 
         protected List<Celija> PronadiZatvoreniPut(Celija trenutnaCelija, List<Celija> put, bool red)
         {
-            put.Add(trenutnaCelija); //dodajem trenutnu celiju u put
+            put.Add(trenutnaCelija);
 
-            if (red)    //pretrazujem red
+            if (red)
             {
-                if (trenutnaCelija != put[0]) // ako nije prva iteracija
+                if (trenutnaCelija != put[0])
                 {
-                    for (int i = 1; i <= UpraviteljTablice.brojStupaca; i++) //pretrazujem cjeli red za pocetnu celiju
+                    for (int i = 1; i <= UpraviteljTablice.brojStupaca; i++)
                     {
-                        if (UpraviteljTablice.tablicaTransporta.TablicaCelija[trenutnaCelija.Red][i] == put[0]) return put; //ako je pronadjena pocetna celija, vrati put
+                        if (UpraviteljTablice.tablicaTransporta.TablicaCelija[trenutnaCelija.Red][i] == put[0]) return put;
                     }
                 }
-                for (int i = 1; i <= UpraviteljTablice.brojStupaca; i++) //pretrazujem cjeli red za zauzete celije
+                for (int i = 1; i <= UpraviteljTablice.brojStupaca; i++)
                 {
-                    if (UpraviteljTablice.tablicaTransporta.TablicaCelija[trenutnaCelija.Red][i].Zauzeto) //ako je celija zauzeta
+                    if (UpraviteljTablice.tablicaTransporta.TablicaCelija[trenutnaCelija.Red][i].Zauzeto)
                     {
-                        if (!put.Contains(UpraviteljTablice.tablicaTransporta.TablicaCelija[trenutnaCelija.Red][i])) //ako celija nije vec u putu i ako nije trenutna celija
+                        if (!put.Contains(UpraviteljTablice.tablicaTransporta.TablicaCelija[trenutnaCelija.Red][i]))
                         {
-                            List<Celija> noviPut = PronadiZatvoreniPut(UpraviteljTablice.tablicaTransporta.TablicaCelija[trenutnaCelija.Red][i], put, false); //rekurzivno trazim dalje
-                            if (noviPut != null) return noviPut; //ako je pronadjen put, vrati ga
+                            List<Celija> noviPut = PronadiZatvoreniPut(UpraviteljTablice.tablicaTransporta.TablicaCelija[trenutnaCelija.Red][i], put, false);
+                            if (noviPut != null) return noviPut;
                         }
                     }
                 }
             }
-            else //pretrazujem stupac
+            else
             {
-                for (int i = 1; i <= UpraviteljTablice.brojRedova; i++) //pretrazujem cjeli stupac za pocetnu celiju
+                for (int i = 1; i <= UpraviteljTablice.brojRedova; i++)
                 {
-                    if (UpraviteljTablice.tablicaTransporta.TablicaCelija[i][trenutnaCelija.Stupac] == put[0]) return put; //ako je pronadjena pocetna celija, vrati put
+                    if (UpraviteljTablice.tablicaTransporta.TablicaCelija[i][trenutnaCelija.Stupac] == put[0]) return put;
                 }
-                for (int i = 1; i <= UpraviteljTablice.brojRedova; i++) //pretrazujem cjeli stupac za zauzete celije
+                for (int i = 1; i <= UpraviteljTablice.brojRedova; i++)
                 {
-                    if (UpraviteljTablice.tablicaTransporta.TablicaCelija[i][trenutnaCelija.Stupac].Zauzeto) //ako je celija zauzeta
+                    if (UpraviteljTablice.tablicaTransporta.TablicaCelija[i][trenutnaCelija.Stupac].Zauzeto)
                     {
-                        if (!put.Contains(UpraviteljTablice.tablicaTransporta.TablicaCelija[i][trenutnaCelija.Stupac])) //ako celija nije vec u putu i ako nije trenutna celija
+                        if (!put.Contains(UpraviteljTablice.tablicaTransporta.TablicaCelija[i][trenutnaCelija.Stupac]))
                         {
-                            List<Celija> noviPut = PronadiZatvoreniPut(UpraviteljTablice.tablicaTransporta.TablicaCelija[i][trenutnaCelija.Stupac], put, true); //rekurzivno trazim dalje
-                            if (noviPut != null) return noviPut; //ako je pronadjen put, vrati ga
+                            List<Celija> noviPut = PronadiZatvoreniPut(UpraviteljTablice.tablicaTransporta.TablicaCelija[i][trenutnaCelija.Stupac], put, true);
+                            if (noviPut != null) return noviPut;
                         }
                     }
                 }
             }
-            put.Remove(trenutnaCelija); //ako nije pronadjen put, makni trenutnu celiju iz puta
-            return null; //ako nije pronadjen put, vrati null
+            put.Remove(trenutnaCelija);
+            return null;
         }
 
         protected void IspisiZatvoreniPut(List<Celija> zatvoreniPut)
